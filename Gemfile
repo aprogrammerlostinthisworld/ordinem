@@ -37,6 +37,10 @@ end
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
+group :production do
+#  gem 'pg'
+end
+
 group :test do
   gem 'turn', '0.8.2', :require => false
   gem 'factory_girl_rails', '~> 1.2'

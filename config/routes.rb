@@ -1,4 +1,9 @@
 Ordinem::Application.routes.draw do
+  root :to => 'page#home'
+
+  get "page/about"
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
