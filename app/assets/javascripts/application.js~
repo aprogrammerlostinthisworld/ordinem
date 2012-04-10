@@ -17,7 +17,7 @@
 
 $(document).ready(function(){
   /* Your javascripts goes here... */
-  $('#loginForm').bind('click', function (e) {
+  $('#dlgLogin').bind('click', function (e) {
     e.stopPropagation()
   })
 

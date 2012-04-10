@@ -21,6 +21,10 @@ group :assets do
   gem 'therubyracer', :platform => :ruby
 
   gem 'uglifier', '>= 1.0.3'
+
+  gem 'twitter-bootstrap-rails'
+#  gem 'less-rails-bootstrap'
+
 end
 
 # To use ActiveModel has_secure_password
@@ -37,6 +41,15 @@ end
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
+group :production do
+#  gem 'pg'
+end
+
+group :development do
+  gem 'hpricot'
+  gem 'ruby_parser'
+end
+
 group :test do
   gem 'turn', '0.8.2', :require => false
   gem 'factory_girl_rails', '~> 1.2'
