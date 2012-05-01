@@ -1,4 +1,4 @@
-.span8
+.span5
   .hero-unit
     %h1 Ordinem
     %p The project managements system
@@ -13,7 +13,7 @@
     %h3 Login
   .modal-body
     %p One fine body…
-      fdfsafds
+      
   .modal-footer
     %a.btn{:href => "#"} Close
     %a.btn.btn-primary{:href => "/register"} Register

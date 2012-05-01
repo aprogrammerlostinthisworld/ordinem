@@ -11,7 +11,4 @@ class User < ActiveRecord::Base
                   :home_phone, :mobile_phone,
                   :skype, :icq, 
                   :locale
-                  
-                  
-  validates :current_password, :presence => TRUE, :if => :email_changed?
 end

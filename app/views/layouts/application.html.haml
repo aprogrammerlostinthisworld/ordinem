@@ -25,32 +25,78 @@
           %a.brand(href="/") Ordinem
           .container.nav-collapse
             %ul.nav
-              %li= link_to "About", "/about"
+              - if user_signed_in?
+                .btn-group  
 
-            %ul.nav.pull-right
-              -# %a.btn{"data-toggle" => "modal", :href => "#dlgLogin"} Login
-              -# %a.btn.btn-primary(href="/login") Login
-              -# %a.btn(href="/register") Register
-              
-              %li#fat-menu.dropdown
-                %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-                  Login
-                  %b.caret
-                %ul.dropdown-menu#loginForm
-                  %li.span4
-                    %form.form-horizontal
-                      .control-group
-                        %label{:for => "login_email"} Email
-                        %input#login_email
-                      .control-group
-                        %label{:for => "login_password"} Password
-                        %input#login_password
-                      %button.btn.btn-primary{:type => "submit"} Login 
+                  %a.btn.btn-primary.btn-header.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+                    %i.icon-book
+                    Projects
+                    %span.caret
+                  %ul.dropdown-menu
+                    %li 
+                      %a{:href => "#"}
+                        %i.icon-chevron-right
+                        project 1  
+                    %li 
+                      %a{:href => "#"}
+                        
+                        project 2
+                        
+                          
+                    %li.divider
+                    %li
+                      %a{:href => "#"}
+                        %i.icon-plus
+                        Add new project
+            %ul.nav.pull-right.btn-toolbar
+              - if user_signed_in?
+                .btn-group  
+
+                  %a.btn.btn-primary.btn-header.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+                    %i.icon-user
+                    = current_user.email
+                    %span.caret
+                  %ul.dropdown-menu
+                    %li
+                      %a{:href => edit_user_registration_path}
+                        %i.icon-user
+                        Profile
+                    %li.divider
+                    %li 
+                      -# %i.icon-off
+                      -# = link_to "Sign Out", destroy_user_session_path, :method => :delete 
+                      %a{:href => destroy_user_session_path, "data-method" => "delete"}
+                        %i.icon-off
+                        Sign Out                  
+              - else
+                %li#fat-menu.dropdown
+                  %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+                    Login
+                    %b.caret
+                  %ul.dropdown-menu#loginForm
+                    %li.span3.form-horizontal 
+                      = form_tag user_session_path do
+                        .control-group
+                          = label_tag 'user[email]', 'Email'
+                          = text_field_tag 'user[email]'
+                        .control-group
+                          = label_tag 'user[password]', 'Password'
+                          
+                          = password_field_tag 'user[password]'
+                        = check_box_tag 'user[remember_me]'
+                        = label_tag 'user[remember_me]', 'Remember me'
+                        %button.btn.btn-primary Sign in
+                        = link_to " (Forgot your password?)", new_password_path('user')
+                        = link_to "Register new user", new_user_registration_path
+                    -# = render 'devise/sessions/new'    
+                    -# = link_to "Sign In", new_user_session_path
+                   
 
     .container
       .content
         .row
-          = yield
+          .span12
+            = yield
           /
             .span9
               
@@ -63,13 +109,21 @@
                   %li= link_to "Link 2", "/path2"
                   %li= link_to "Link 3", "/path3"
     
-      %footer.footer
-        %p All right reserved
+      %footer
         %p.pull-right &copy; 2012 Bohdan Shevchuk
-    
+        %p
+          All right reserved.
+        %p
+          = link_to "About", "/about"
+          |
+          = link_to "Licence", "/licence"
+          |
+          = link_to "Help", "/help"
+
+
     /
       Javascripts
       \==================================================
     / Placed at the end of the document so the pages load faster
     = javascript_include_tag "application"
-
+
