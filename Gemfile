@@ -10,7 +10,7 @@ gem 'devise'
 gem 'rails-i18n'
 gem 'haml-rails'
 gem 'jquery-rails'
-
+gem 'heroku'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -43,6 +43,7 @@ end
 # gem 'ruby-debug19', :require => 'ruby-debug'
 group :production do
   gem 'pg'
+  gem 'thin'
 end
 
 group :development do

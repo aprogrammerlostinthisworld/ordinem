@@ -5,6 +5,11 @@ class PagesController < ApplicationController
   def about
   end
   
-  def no_js
+  def errors
+    if %w(no_js).include?(params[:id])
+      render :layout => 'notification' 
+    else
+      redirect_to root_path
+    end
   end
 end

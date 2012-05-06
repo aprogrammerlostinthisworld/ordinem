@@ -1,6 +1,9 @@
-%h2
-  Edit #{resource_name.to_s.humanize}
+%section#user
+  %h1
+    = _uname
+    %small Manage your personal data
 = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
+  -# .alert.alert-error
   = devise_error_messages!
   .tabbable
   %ul.nav.nav-tabs
@@ -9,10 +12,9 @@
     %li
       %a{"data-toggle" => "tab", :href => "#tab2"} Contacts
     %li
-      %a{"data-toggle" => "tab", :href => "#tab3"} Security
-    %li
-      %a{"data-toggle" => "tab", :href => "#tab4"} Account  
+      %a{"data-toggle" => "tab", :href => "#tab3"} Account  
   .tab-content
+  
     #tab1.tab-pane.active
       %p You general info
       %div
@@ -21,7 +23,8 @@
       %div
         = f.label :lastname
         = f.text_field :lastname
-          
+      %div= f.submit "Update"  
+       
     #tab2.tab-pane
       %p Contacts
       %div
@@ -42,26 +45,45 @@
       %div
         = f.label :email
         = f.email_field :email
-    #tab3.tab-pane  
-      %div
-        = f.label :password
-        %i (leave blank if you don't want to change it)
-        %br/
-        = f.password_field :password, :autocomplete => "off"
-      %div
-        = f.label :password_confirmation
-        = f.password_field :password_confirmation
-    #tab4.tab-pane 
-      %h3 Cancel my account
-      %p
-        Unhappy? #{link_to "Cancel my account", registration_path(resource_name), :confirm => "Are you sure?", :method => :delete}.
-  
+      %div= f.submit "Update"
+    
+    #tab3.tab-pane 
+      .page-header
+        %h3 Cancel my account
+        %p
+          Unhappy? #{link_to "Cancel my account", registration_path(resource_name), :confirm => "Are you sure?", :method => :delete}.
       
-  %div.divider
-    = f.label :current_password
-    %i (we need your current password to confirm your changes)
-    %br/
-    = f.password_field :current_password
-  %div= f.submit "Update"
+      %h3 Password
+      %a.btn.btn-primary.btn-large{"data-toggle" => "modal", "data-backdrop" => "static", :href => "#dlgChangePassword"} 
+  
+        Change password ...
+        
+      #dlgChangePassword.modal.hide.fade{:style => "display: none; "}
+        .modal-header
+          -# %button.close{"data-dismiss" => "modal"} ×
+          %h3 Change password
+        .modal-body
+          %div
+            = f.label :current_password
+            %i (we need your current password to confirm your changes)
+            %br/
+            = f.password_field :current_password
+          %div
+            = f.label :password
+            %i (leave blank if you don't want to change it)
+            %br/
+            = f.password_field :password, :autocomplete => "off"
+          %div
+            = f.label :password_confirmation
+            = f.password_field :password_confirmation
+            
+          %div.divider
+
+            
+        .modal-footer
+          %a.btn{"data-dismiss" => "modal", :href => "#"} Close
+          %a.btn.btn-primary{:href => "#"} Change password
+      
+
 
 -# = link_to "Back", :back

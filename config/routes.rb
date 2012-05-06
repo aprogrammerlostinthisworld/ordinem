@@ -1,17 +1,21 @@
 Ordinem::Application.routes.draw do
-  devise_for :users
-#  devise_for :users, :path => "users", :path_names => { :sign_in => 'login', :sign_out => 'logout', :password => 'secret', :confirmation => 'verification', :unlock => 'unblock', :registration => 'register', :sign_up => 'sign_up' }
+  get "dashboard/index"
 
+  devise_for :users
+  
+#  devise_for :users, :path => "users", :path_names => { :sign_in => 'login', :sign_out => 'logout', :password => 'secret', :confirmation => 'verification', :unlock => 'unblock', :registration => 'register', :sign_up => 'sign_up' }
+  authenticated :user do
+    root :to => 'dashboard#index'
+  end
   root :to => 'pages#home'
+  
 
   match '/about', :to => 'pages#about';
-  
-  # authenticated :user do
-  #  root :to => 'page#about'
-  # end
-  
   match '/profile', :to => 'devise/registrations#edit'
+  
+  match '/errors(/:id)',   :to => 'pages#errors'
   resources :users, :only => :show
+  resources :projects
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
