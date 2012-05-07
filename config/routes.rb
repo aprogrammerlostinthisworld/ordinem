@@ -15,7 +15,8 @@ Ordinem::Application.routes.draw do
   
   match '/errors(/:id)',   :to => 'pages#errors'
   resources :users, :only => :show
-  resources :projects
+  resources :tasks
+  resources :projects 
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

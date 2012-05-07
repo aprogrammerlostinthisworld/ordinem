@@ -11,24 +11,42 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120503131952) do
+ActiveRecord::Schema.define(:version => 20120507144213) do
 
   create_table "projects", :force => true do |t|
     t.integer  "user_id"
     t.string   "name"
     t.text     "description"
     t.text     "goal"
-    t.integer  "state",       :default => 0
-    t.boolean  "public",      :default => false
+    t.integer  "state",                  :default => 0
+    t.boolean  "public",                 :default => false
     t.date     "date_from"
     t.date     "date_to"
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
+    t.integer  "tasks_counter"
+    t.integer  "tasks_complete_counter"
   end
 
+  create_table "tasks", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.text     "description"
+    t.integer  "priority"
+    t.integer  "status",         :default => 0
+    t.datetime "date_start"
+    t.datetime "date_due"
+    t.integer  "tasktable_id"
+    t.string   "tasktable_type"
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+  end
+
+  add_index "tasks", ["tasktable_id", "tasktable_type"], :name => "index_tasks_on_tasktable_id_and_tasktable_type"
+
   create_table "users", :force => true do |t|
-    t.string   "firstname"
-    t.string   "lastname"
+    t.string   "first_name"
+    t.string   "last_name"
     t.string   "home_address"
     t.string   "home_phone"
     t.string   "mobile_phone",           :default => "+()", :null => false

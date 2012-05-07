@@ -2,8 +2,8 @@ class DeviseCreateUsers < ActiveRecord::Migration
   def change
     create_table(:users) do |t|
       ## Personal user information
-      t.string :firstname
-      t.string :lastname
+      t.string :first_name
+      t.string :last_name
       t.string :home_address
       t.string :home_phone
       t.string :mobile_phone,       :null => false, :default => "+()"

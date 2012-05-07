@@ -4,8 +4,8 @@ module ApplicationHelper
   end
 
   def _uname
-    if current_user.firstname? and current_user.lastname? then
-      "#{current_user.firstname}  #{current_user.lastname}"
+    if current_user.first_name? and current_user.last_name? then
+      "#{current_user.first_name}  #{current_user.last_name}"
     else
       current_user.email 
     end
