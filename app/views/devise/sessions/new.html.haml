@@ -4,7 +4,7 @@
     Sign in
     %small Start work with your account
 = form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :class => "form-horizontal"}) do |f|
-
+  -#= devise_error_messages!
   .control-group
     = f.label :email, :class => 'control-label'
     .controls

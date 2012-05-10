@@ -14,7 +14,7 @@
     /[if lt IE 9]
       = javascript_include_tag "http://html5shim.googlecode.com/svn/trunk/html5.js"
     = stylesheet_link_tag "application", :media => "all"
-    %link(href="images/favicon.ico" rel="shortcut icon")
+    %link(href="/images/favicon.ico" rel="shortcut icon")
 
   %body
     .navbar.navbar-fixed-top
@@ -24,7 +24,7 @@
             %span.icon-bar 
             %span.icon-bar
             %span.icon-bar
-          %a.brand(href="/") Ordinem
+          = link_to "Ordinem", root_path(:locale => I18n.locale), :class => 'brand'
           - if user_signed_in?
             = render 'layouts/user-main-menu'
           - else 
@@ -32,6 +32,7 @@
             
     .container-fluid
       .row-fluid
+        = render 'layouts/messages'
         = yield 
         = render 'layouts/footer'
         = render 'layouts/debug'

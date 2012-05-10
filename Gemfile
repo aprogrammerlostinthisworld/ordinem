@@ -6,11 +6,24 @@ gem 'rails', '3.2.3'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'sqlite3'
+gem 'cancan'
 gem 'devise'
+gem 'devise_invitable'
+#gem 'rails_admin'
+gem 'rails_admin'#, :git => 'git://github.com/sferik/rails_admin.git'
+
 gem 'rails-i18n'
 gem 'haml-rails'
 gem 'jquery-rails'
 gem 'heroku'
+
+
+gem 'RedCloth'
+gem 'redcarpet'
+gem 'albino'
+gem 'nokogiri'
+#gem 'rails_markitup'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

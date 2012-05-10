@@ -2,4 +2,59 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+
+  dashboard: Dashboard
+  
+  update: Update
+
+  # Actions
+  action:
+    edit: Edit
+    delete: Delete...
+    confirm-delete: Are you sure really delete "%{name}"?
+    show: Show
+    team: Team
+    share: Share
+  
+  # Tasks
+  task:
+    task: Task
+    hold: Hold
+    complete: Complete
+    active: Active
+    create: Create task
+    create-subtask: Create subtask
+    all: All
+    completed: Completed
+    incompleted: Incompleted
+  
+  # Project
+  project:
+    project: Project
+    projects: Projects
+    list: Project list
+    create: Create project
+  # Page
+  page:
+    copyright: All right reserved
+    about:  About Us
+    licence: Licence
+    help:  Help
+  
+  # User
+  user:
+    first_name: First name
+    last_name: Last name
+   
+    email: Email
+    password: Password
+    password_confirmation: Password confirmation
+    agree_terms: By clicking Sign Up, you agree to our 
+    locale: Language
+    sign_up: Sign up
+    sign_in: Sign in
+    sign_out: Sign out
+    remember_me: Remember me
+    forgot_password: Forgot you password?
+    profile: Profile
+    sign_up_slogan: Create you personal account

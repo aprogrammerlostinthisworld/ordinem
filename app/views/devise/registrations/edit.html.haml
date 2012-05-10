@@ -1,8 +1,8 @@
 %section#user
   %h1
-    = _uname
+    = current_user.display_name
     %small Manage your personal data
-= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
+= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :class => "form-horizontal"}, :remote => false) do |f|
   -# .alert.alert-error
   = devise_error_messages!
   .tabbable
@@ -16,42 +16,50 @@
   .tab-content
   
     #tab1.tab-pane.active
-      %p You general info
-      %div
-        = f.label :first_name
-        = f.text_field :first_name
-      %div
-        = f.label :last_name
-        = f.text_field :last_name
-      %div= f.submit "Update"  
+      .control-group
+        = f.label :first_name, t('user.first_name'), :class => 'control-label'
+        .controls  
+          = f.text_field :first_name
+      .control-group
+        = f.label :last_name, t('user.last_name'), :class => 'control-label'
+        .controls  
+          = f.text_field :last_name
+      .form-actions
+        = f.submit t('update'), :class => 'btn-success btn-large'
        
     #tab2.tab-pane
-      %p Contacts
       %div
         = f.label :home_address
         = f.text_field :home_address
       %div
-        = f.label :home_phone
-        = f.text_field :home_phone
+        = f.label :home_number
+        = f.text_field :home_number
       %div
-        = f.label :mobile_phone
-        = f.text_field :mobile_phone
+        = f.label :mobile_number
+        = f.text_field :mobile_number
       %div
-        = f.label :skype
-        = f.text_field :skype
+        = f.label :office_number
+        = f.text_field :office_number  
       %div
-        = f.label :icq
-        = f.text_field :icq
+        = f.label :fax_number
+        = f.text_field :fax_number
       %div
         = f.label :email
         = f.email_field :email
       %div= f.submit "Update"
     
     #tab3.tab-pane 
-      .page-header
-        %h3 Cancel my account
-        %p
-          Unhappy? #{link_to "Cancel my account", registration_path(resource_name), :confirm => "Are you sure?", :method => :delete}.
+      .control-group
+        = f.label t('user.locale'), :class => 'control-label'
+        .controls
+          = f.select :locale, options_for_select([['English', 'en'], ['Ukrainian', 'uk']], :selected => :locale.to_s), :class => 'span1' 
+          
+          = f.submit "Update", :class => "btn"
+      /
+        .page-header
+          %h3 Cancel my account
+          %p
+            Unhappy? #{link_to "Cancel my account", registration_path(resource_name), :confirm => "Are you sure?", :method => :delete}.
       
       %h3 Password
       %a.btn.btn-primary.btn-large{"data-toggle" => "modal", "data-backdrop" => "static", :href => "#dlgChangePassword"} 

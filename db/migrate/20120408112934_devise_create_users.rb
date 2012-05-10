@@ -2,16 +2,20 @@ class DeviseCreateUsers < ActiveRecord::Migration
   def change
     create_table(:users) do |t|
       ## Personal user information
-      t.string :first_name
-      t.string :last_name
+      t.string :first_name,         :limit => 20
+      t.string :last_name,          :limit => 30
       t.string :home_address
-      t.string :home_phone
-      t.string :mobile_phone,       :null => false, :default => "+()"
-      t.string :skype,              :length => 32
-      t.string :icq,                :length => 10
-
+      t.string :home_number,        :limit => 20
+      t.string :office_number,      :limit => 20
+      t.string :fax_number,         :limit => 20
+      t.string :mobile_number,      :limit => 20,   :null => false, :default => "+"
+      t.string :time_zone,          :default => "", :null => false
+      
       ## i18n
-      t.string :locale,             :length => 2
+      t.string :locale,             :limit => 5,    :null => false, :default => "en"
+      
+      # Admin
+      t.boolean :admin,          :default => false, :null => false
 
       ## Database authenticatable
       t.string :email,              :null => false, :default => ""

@@ -21,6 +21,8 @@ $(document).ready(function(){
     e.stopPropagation()
   })
 
+
+
 });
 
 $(document).scroll(function(){

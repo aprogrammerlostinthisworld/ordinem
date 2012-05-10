@@ -1,45 +1,45 @@
 %section#sign_up
 .page-header
   %h1
-    Sign up
-    %small Create you personal account
+    = t('user.sign_up')
+    %small 
+      = t('user.sign_up_slogan')
 = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :class => "form-horizontal"} ) do |f|
-  = devise_error_messages!
 
   .control-group
-    = f.label :first_name, :class => 'control-label'
+    = f.label :first_name, t('user.first_name'), :class => 'control-label'
     .controls
       = f.text_field :first_name
       
   .control-group
-    = f.label :last_name, :class => 'control-label'
+    = f.label :last_name, t('user.last_name'), :class => 'control-label'
     .controls
-      = f.test_field :last_name
+      = f.text_field :last_name
       
   .control-group
-    = f.label :email, :class => 'control-label'
+    = f.label :email, t('user.email'), :class => 'control-label'
     .controls
       = f.email_field :email, :required => true
 
   .control-group
-    = f.label :password, :class => 'control-label'
+    = f.label :password, t('user.password'), :class => 'control-label'
     .controls
       = f.password_field :password, :required => true
 
   .control-group
-    = f.label :password_confirmation, :class => 'control-label'
+    = f.label :password_confirmation, t('user.password_confirmation'),:class => 'control-label'
     .controls
       = f.password_field :password_confirmation, :required => true
-  
-  
-  .alert.alert-error
-    Licence agrement
+      
+  .control-group
+    .controls
+      = t('user.agree_terms')
+      = link_to t('page.terms'), page_path(:terms)
     
-
+    = f.hidden_field :locale,    :value => I18n.locale
+  
   .form-actions
-    = f.submit "Sign up", :class => 'btn-success btn-large'
-    or
-    %a.btn.btn-primary.btn-small{:href => new_session_path(resource_name)}
-      Sign in
+    = f.submit t('user.sign_up'), :class => 'btn-success btn-large'
+
       
 -# = render "links"

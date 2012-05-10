@@ -8,15 +8,21 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
   attr_accessible :first_name, :last_name, :home_address, 
-                  :home_phone, :mobile_phone,
-                  :skype, :icq, 
-                  :locale
+                  :home_number, :mobile_number, :fax_number, :office_number,
+                  :locale, :is_admin
                   
                   
   # validates :current_password, :presence => TRUE, :if => :email_changed?
   
   has_many :projects, :dependent => :destroy
   
+  def display_name
+    if self.first_name? and self.last_name? then
+      "#{self.first_name} #{self.last_name}"
+    else
+      self.email 
+    end
+  end
   
   
   

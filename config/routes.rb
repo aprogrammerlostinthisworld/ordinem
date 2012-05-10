@@ -1,8 +1,9 @@
 Ordinem::Application.routes.draw do
-  get "dashboard/index"
-
+  mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
   devise_for :users
   
+  get "dashboard/index"
+    
 #  devise_for :users, :path => "users", :path_names => { :sign_in => 'login', :sign_out => 'logout', :password => 'secret', :confirmation => 'verification', :unlock => 'unblock', :registration => 'register', :sign_up => 'sign_up' }
   authenticated :user do
     root :to => 'dashboard#index'
@@ -10,13 +11,22 @@ Ordinem::Application.routes.draw do
   root :to => 'pages#home'
   
 
-  match '/about', :to => 'pages#about';
-  match '/profile', :to => 'devise/registrations#edit'
   
-  match '/errors(/:id)',   :to => 'pages#errors'
+  match '/profile',       :to => 'devise/registrations#edit'
+  
+  # match '/about',         :to => 'pages#about'
+  # match '/terms',         :to => 'pages#terms'
+
+  match '/errors(/:id)',  :to => 'pages#errors'
+  
+  #match '/page/:id',      :to => 'pages#index' 
+  
+  resources :pages, :only => [:show, :home]
   resources :users, :only => :show
   resources :tasks
   resources :projects 
+  
+  
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
