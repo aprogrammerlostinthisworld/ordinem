@@ -10,17 +10,7 @@
 
 def setup
 
-  # Ensure IM Types are present
-  if ImType.count == 0
-    puts '*** Creating IM Types ***'
-  	ImType.create!(:name => 'ICQ')
-  	ImType.create!(:name => 'AIM')
-  	ImType.create!(:name => 'MSN')
-  	ImType.create!(:name => 'Yahoo!')
-  	ImType.create!(:name => 'Skype')
-  	ImType.create!(:name => 'Jabber')
-  end
-  
+ 
   #if Page.count == 0
     puts '*** Creating static pages ***'
     
@@ -28,11 +18,10 @@ def setup
     
     Page.create!(:name => 'about', :title => 'About', :locale => 'en', :published => true,
     :content => <<ABOUT_EN)   
-h1. About Us
 *Ordinem* is a simplified project management system and created as bachelor diploma
 
 h1. Thirth parties
- *Ordinem* writen on "Ruby":http://ruby-lang.org with "Ruby on Rails":http://rubyonrails.org framework
+*Ordinem* writen on "Ruby":http://ruby-lang.org with "Ruby on Rails":http://rubyonrails.org framework
  
 See source's on github: https://github.com/deodatus/ordinem.git
 
@@ -42,16 +31,16 @@ ABOUT_EN
     
     Page.create!(:name => 'about', :title => 'Про Ordinem', :locale => 'uk', :published => true,
      :content => <<ABOUT_UK)   
-h1. Про нас
- *Ordinem* є моїм поглядом на просту систему керування проектами і створений в якості дипломного проекту бакалавра
+*Ordinem* є моїм поглядом на просту систему керування проектами і створений в якості дипломного проекту бакалавра
 
 
 h1. Треті сторони
- *Ordinem* написаний на "Ruby":http://ruby-lang.org з використанням фреймворуку "Ruby on Rails":http://rubyonrails.org.
- 
-Коди проекту Ви можете подивитись на github: https://github.com/deodatus/ordinem.git
 
-Як CSS-framework використано "Twitter Bootstrap":http://twitter.github.com/bootstrap
+*Ordinem* написаний на "(external) Ruby":http://ruby-lang.org з використанням фреймворуку "Ruby on Rails":http://rubyonrails.org.
+ 
+Коди проекту Ви можете подивитись на github: "(external) https://github.com/deodatus/ordinem.git":https://github.com/deodatus/ordinem.git
+
+Як CSS-framework використано "(external) Twitter Bootstrap":http://twitter.github.com/bootstrap
 ABOUT_UK
 
     Page.create!(:name => 'terms', :title => 'Terms of use', :locale => 'en', :published => true,

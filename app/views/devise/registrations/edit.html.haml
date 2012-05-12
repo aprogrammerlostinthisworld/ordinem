@@ -1,18 +1,21 @@
 %section#user
   %h1
     = current_user.display_name
-    %small Manage your personal data
+    /
+      %small 
+        Manage your personal data
 = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :class => "form-horizontal"}, :remote => false) do |f|
-  -# .alert.alert-error
-  = devise_error_messages!
   .tabbable
   %ul.nav.nav-tabs
     %li.active
-      %a{"data-toggle" => "tab", :href => "#tab1"} General
+      %a{"data-toggle" => "tab", :href => "#tab1"} 
+        = t('general')
     %li
-      %a{"data-toggle" => "tab", :href => "#tab2"} Contacts
+      %a{"data-toggle" => "tab", :href => "#tab2"} 
+        = t('contacts')
     %li
-      %a{"data-toggle" => "tab", :href => "#tab3"} Account  
+      %a{"data-toggle" => "tab", :href => "#tab3"} 
+        = t('account')  
   .tab-content
   
     #tab1.tab-pane.active
@@ -28,43 +31,57 @@
         = f.submit t('update'), :class => 'btn-success btn-large'
        
     #tab2.tab-pane
-      %div
-        = f.label :home_address
-        = f.text_field :home_address
-      %div
-        = f.label :home_number
-        = f.text_field :home_number
-      %div
-        = f.label :mobile_number
-        = f.text_field :mobile_number
-      %div
-        = f.label :office_number
-        = f.text_field :office_number  
-      %div
-        = f.label :fax_number
-        = f.text_field :fax_number
-      %div
-        = f.label :email
-        = f.email_field :email
-      %div= f.submit "Update"
-    
+      .control-group
+        = f.label :email, :class => 'control-label'
+        .controls  
+          = f.email_field :email
+      
+      .control-group
+        = f.label :home_address, :class => 'control-label'
+        .controls  
+          = f.text_field :home_address
+          
+      .control-group
+        = f.label :home_number, :class => 'control-label'
+        .controls  
+          = f.text_field :home_number
+          
+      .control-group
+        = f.label :mobile_number, :class => 'control-label'
+        .controls
+          = f.text_field :mobile_number
+          
+      .control-group
+        = f.label :office_number, :class => 'control-label'
+        .controls  
+          = f.text_field :office_number 
+           
+      .control-group
+        = f.label :fax_number, :class => 'control-label'
+        .controls  
+          = f.text_field :fax_number
+
+      .form-actions
+        = f.submit  t('update'), :class => 'btn-success btn-large'
+
     #tab3.tab-pane 
       .control-group
         = f.label t('user.locale'), :class => 'control-label'
         .controls
-          = f.select :locale, options_for_select([['English', 'en'], ['Ukrainian', 'uk']], :selected => :locale.to_s), :class => 'span1' 
+          = f.select :locale, options_for_select([['English', 'en'], ['Ukrainian', 'uk']], :selected => I18n.locale)
           
-          = f.submit "Update", :class => "btn"
+          = f.submit t('update'), :class => "btn"
       /
         .page-header
           %h3 Cancel my account
           %p
             Unhappy? #{link_to "Cancel my account", registration_path(resource_name), :confirm => "Are you sure?", :method => :delete}.
       
-      %h3 Password
-      %a.btn.btn-primary.btn-large{"data-toggle" => "modal", "data-backdrop" => "static", :href => "#dlgChangePassword"} 
-  
-        Change password ...
+      .control-group
+        = f.label t('user.password'), :class => 'control-label'
+        .controls
+          %a.btn.btn-primary{"data-toggle" => "modal", "data-backdrop" => "static", :href => "#dlgChangePassword"} 
+            Change password ...
         
       #dlgChangePassword.modal.hide.fade{:style => "display: none; "}
         .modal-header
@@ -74,12 +91,12 @@
           %div
             = f.label :current_password
             %i (we need your current password to confirm your changes)
-            %br/
+            %br
             = f.password_field :current_password
           %div
             = f.label :password
             %i (leave blank if you don't want to change it)
-            %br/
+            %br
             = f.password_field :password, :autocomplete => "off"
           %div
             = f.label :password_confirmation

@@ -7,6 +7,7 @@ gem 'rails', '3.2.3'
 
 gem 'sqlite3'
 gem 'cancan'
+gem 'simple_form'
 gem 'devise'
 gem 'devise_invitable'
 #gem 'rails_admin'

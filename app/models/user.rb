@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
+  devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :token_authenticatable, :lockable, :timeoutable
 
@@ -25,7 +25,6 @@ class User < ActiveRecord::Base
   end
   
   
-  
   def update_with_password(params={})
     current_password = params.delete(:current_password)
 
@@ -47,5 +46,6 @@ class User < ActiveRecord::Base
     clean_up_passwords
     result
   end
+
 
 end

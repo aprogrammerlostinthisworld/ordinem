@@ -1,5 +1,5 @@
 !!! 5
-%html(lang="en")
+%html(lang="#{I18n.locale}")
   %head
     %meta(charset="utf-8")
     %meta(name="viewport" content="width=device-width, initial-scale=1.0")
@@ -24,7 +24,7 @@
             %span.icon-bar 
             %span.icon-bar
             %span.icon-bar
-          = link_to "Ordinem", root_path(:locale => I18n.locale), :class => 'brand'
+          = link_to "Ordinem", (user_signed_in? ? root_path : root_path(:locale => I18n.locale)) , :class => 'brand'
           - if user_signed_in?
             = render 'layouts/user-main-menu'
           - else 
@@ -37,4 +37,8 @@
         = render 'layouts/footer'
         = render 'layouts/debug'
     = javascript_include_tag "application"
-
+    :javascript
+      $(document).ready(function(){
+        $.datepicker.setDefaults( $.datepicker.regional[ "#{I18n.locale == :en ? "en-GB" : I18n.locale}" ] );
+      });
+  

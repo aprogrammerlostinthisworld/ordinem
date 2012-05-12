@@ -15,13 +15,13 @@
 /tmp
 
 /.rvmrc
+.rmvrc
 *.rbc
 *.sassc
 .sass-cache
 capybara-*.html
 .rspec
 /vendor/bundle
-/db/*.sqlite3
 /public/system/*
 /coverage/
 /spec/tmp/*

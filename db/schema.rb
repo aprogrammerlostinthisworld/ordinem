@@ -11,18 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120509185732) do
-
-  create_table "im_types", :force => true do |t|
-    t.integer "user_id"
-    t.string  "name"
-    t.text    "description"
-    t.text    "goal"
-    t.integer "state",       :default => 0
-    t.boolean "public",      :default => false
-    t.date    "date_from"
-    t.date    "date_to"
-  end
+ActiveRecord::Schema.define(:version => 20120510121133) do
 
   create_table "members", :force => true do |t|
     t.integer  "project_id"
@@ -87,15 +76,6 @@ ActiveRecord::Schema.define(:version => 20120509185732) do
 
   add_index "tasks", ["tasktable_id", "tasktable_type"], :name => "index_tasks_on_tasktable_id_and_tasktable_type"
 
-  create_table "user_im_values", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "im_type_id"
-    t.string   "value",      :limit => 50, :default => "",    :null => false
-    t.boolean  "is_default",               :default => false, :null => false
-    t.datetime "created_at",                                  :null => false
-    t.datetime "updated_at",                                  :null => false
-  end
-
   create_table "users", :force => true do |t|
     t.string   "first_name",             :limit => 20
     t.string   "last_name",              :limit => 30
@@ -108,7 +88,7 @@ ActiveRecord::Schema.define(:version => 20120509185732) do
     t.string   "locale",                 :limit => 5,  :default => "en",  :null => false
     t.boolean  "admin",                                :default => false, :null => false
     t.string   "email",                                :default => "",    :null => false
-    t.string   "encrypted_password",                   :default => "",    :null => false
+    t.string   "encrypted_password",                   :default => ""
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -128,11 +108,19 @@ ActiveRecord::Schema.define(:version => 20120509185732) do
     t.string   "authentication_token"
     t.datetime "created_at",                                              :null => false
     t.datetime "updated_at",                                              :null => false
+    t.string   "invitation_token",       :limit => 60
+    t.datetime "invitation_sent_at"
+    t.datetime "invitation_accepted_at"
+    t.integer  "invitation_limit"
+    t.integer  "invited_by_id"
+    t.string   "invited_by_type"
   end
 
   add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["invitation_token"], :name => "index_users_on_invitation_token"
+  add_index "users", ["invited_by_id"], :name => "index_users_on_invited_by_id"
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
   add_index "users", ["unlock_token"], :name => "index_users_on_unlock_token", :unique => true
 

@@ -9,6 +9,7 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
+ *= require jquery-ui/bootstrap/jquery-ui-1.8.16.custom.css 
  *= require bootstrap_and_overrides
  *= require projects.css.scss
  *= //require_tree .

@@ -1,6 +1,6 @@
 Ordinem::Application.routes.draw do
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
-  devise_for :users
+  devise_for :users, :controllers => { :registrations => :registrations }
   
   get "dashboard/index"
     
@@ -13,18 +13,20 @@ Ordinem::Application.routes.draw do
 
   
   match '/profile',       :to => 'devise/registrations#edit'
-  
-  # match '/about',         :to => 'pages#about'
-  # match '/terms',         :to => 'pages#terms'
-
+ 
   match '/errors(/:id)',  :to => 'pages#errors'
   
   #match '/page/:id',      :to => 'pages#index' 
   
   resources :pages, :only => [:show, :home]
-  resources :users, :only => :show
-  resources :tasks
+  resources :users, :only => [:show, :edit]
+  resources :tasks do
+    member do
+      put 'set_complete', :as => 'set_complete'
+    end
+  end
   resources :projects 
+  resources :members, :only => [:index, :create, :destroy]
   
   
 

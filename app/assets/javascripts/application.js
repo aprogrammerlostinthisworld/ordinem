@@ -12,6 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui.min
+//= require jquery.ui.datepicker-en-GB
+//= require jquery.ui.datepicker-uk
+//= require jquery.ui.datepicker-ru
 //= require twitter/bootstrap
 //= require_tree .
 
@@ -20,11 +24,37 @@ $(document).ready(function(){
   $('#loginForm').bind('click', function (e) {
     e.stopPropagation()
   })
+  $('.external').attr('target', '_blank'); //for textile link
+  
 
-
-
+  
+  $('.delete_task').bind('ajax:success', function() {  
+    $(this).closest('.task').fadeOut().remove();  
+  }); 
+  
+  $("#btn-all").click(function(){
+    $("#tasks").children().slideDown();  
+  });
+  $("#btn-completed").click(function(){
+    $("#tasks").children(".task_complete").slideDown();  
+    $("#tasks").children(".task_incomplete").slideUp();  
+  });
+  $("#btn-incompleted").click(function(){
+    $("#tasks").children(".task_incomplete").slideDown();  
+    $("#tasks").children(".task_complete").slideUp();  
+  });
+  
+  $('.typeahead').typeahead({
+    source: function (typeahead, query) {
+        return $.post('/typeahead', { query: query }, function (data) {
+            return typeahead.process(data);
+        });
+    }
+});
+  
 });
 
+/*
 $(document).scroll(function(){
     // If has not activated (has no attribute "data-top"
     if (!$('.subnav').attr('data-top')) {
@@ -40,3 +70,4 @@ $(document).scroll(function(){
     else
         $('.subnav').removeClass('subnav-fixed');
 });
+*/

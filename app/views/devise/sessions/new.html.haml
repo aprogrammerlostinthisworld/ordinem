@@ -1,17 +1,17 @@
 %section#sign_in
 .page-header
   %h1
-    Sign in
-    %small Start work with your account
-= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :class => "form-horizontal"}) do |f|
+    = t ('user.sign_in') 
+    -# %small Start work with your account
+= form_for(resource, :as => resource_name,:locale => I18n.locale,  :url => session_path(resource_name), :html => { :class => "form-horizontal"}) do |f|
   -#= devise_error_messages!
   .control-group
-    = f.label :email, :class => 'control-label'
+    = f.label :email,t('user.email'), :class => 'control-label'
     .controls
       = f.email_field :email, :required => true
 
   .control-group
-    = f.label :password, :class => 'control-label'
+    = f.label :password,t('user.password'), :class => 'control-label'
     .controls
       = f.password_field :password, :required => true
 
@@ -19,10 +19,10 @@
     .control-group
       .controls
         = f.check_box :remember_me
-        = f.label :remember_me
+        = f.label :remember_me, t('user.remember_me')
       
   .form-actions    
-    %div= f.submit "Sign in", :class => 'btn-success btn-large'
+    %div= f.submit  t('user.sign_in'), :class => 'btn-success btn-large'
   
   
 -# = render "links"
