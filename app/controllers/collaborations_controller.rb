@@ -1,4 +1,5 @@
 class CollaborationsController < ApplicationController
+  before_filter :authenticate_user!
   before_filter :get_project
   
  # def new
@@ -9,20 +10,20 @@ class CollaborationsController < ApplicationController
     
     user = User.find_or_initialize_by_email(params[:email].strip)
 
-    redirect_to project_collaborations_path(@project),
+    redirect_to collaborations_path(@project),
        :notice => "#{user.email} is already invited" and return if @project.collaborators.include? user
 
     User.invite!(:email => params[:email]) if user.new_record?
     
-    @project.users << user
+    @project.members << user
   #  Mailer.delay.invite(user, @project.name, user.password)
 
-    redirect_to project_collaborations_path(@project), :notice => "#{user.email} is invited to the project"
+    redirect_to collaborations_path(@project), :notice => "#{user.email} is invited to the project"
   end
 
   def index
     @collaboration = @project.collaborations.build
-    @users = @project.members
+    @members = @project.members
   end
 
   def destroy

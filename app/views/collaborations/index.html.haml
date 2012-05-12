@@ -8,13 +8,16 @@
 
 .tab-content
   #list.tab-pane.active
-    = render 'collaborations/list'
+    - if @members.count != 0
+      = render 'collaborations/list', :object => @members
+    - else
+      no data
   #invite.tab-pane
     = form_tag @collaborator, remote: false do |f|
       .control-group
         = label_tag :email, t('user.email'), :class => 'control-label'
         .controls  
-          = text_field_tag :email
+          = email_field_tag :email
       
       .form-actions
         = submit_tag t('collaborator.add'), :class => 'btn-success btn-large'

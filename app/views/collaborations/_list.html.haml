@@ -5,9 +5,16 @@
         = t('collaborator.name')
       %th
         = t('collaborator.has_tasks')
+      %th
+        invited at
+      
   %tbody
+  - @members.each do |m|
     %tr
       %td 
-        dfdf…
+        = m.display_name
+      %td
+        = current_project.permissions_for(m).can_manage_tasks
       %td 
-        dfd…
+        
+  

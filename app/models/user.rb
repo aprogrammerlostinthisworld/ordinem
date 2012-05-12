@@ -12,12 +12,14 @@ class User < ActiveRecord::Base
                   :locale, :is_admin
                   
   has_many :projects, :dependent => :destroy
-  has_many :collaborations
+  # has_many :collaborations
   
   def all_projects
     collaborations.map(&:project) | Project.where(:user_id => id)
   end
   
+
+ 
   def display_name
     if self.first_name? and self.last_name? then
       "#{self.first_name} #{self.last_name}"

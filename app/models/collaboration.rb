@@ -6,5 +6,8 @@ class Collaboration < ActiveRecord::Base
   
   belongs_to :project #original
   
+  def manage_tasks?
+    self.can_manage_tasks?
+  end
   
 end
