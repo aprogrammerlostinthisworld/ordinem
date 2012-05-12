@@ -1,0 +1,29 @@
+.nav-collapse
+  %ul.nav.pull-right
+    %li
+      = link_to t('user.sign_up'), new_user_registration_path(:locale => I18n.locale) 
+    %li.divider-vertical
+    %li.dropdown
+      %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+        = t ('user.sign_in') 
+        %b.caret
+      %ul.dropdown-menu#loginForm
+        %li.span3.form-horizontal
+          = form_tag user_session_path, :locale => I18n.locale do
+            %br
+            .control-group
+              = label_tag 'user[email]', t('user.email')
+              = text_field_tag 'user[email]'
+            .control-group
+              = label_tag 'user[password]', t('user.password')
+              
+              = password_field_tag 'user[password]'
+            
+            = check_box_tag 'user[remember_me]'
+            = label_tag 'user[remember_me]', t('user.remember_me')
+            %button.btn.btn-primary 
+              = t('user.sign_in')
+            %hr
+            = link_to t('user.forgot_password'), new_password_path('user', :locale => I18n.locale)
+    
+  

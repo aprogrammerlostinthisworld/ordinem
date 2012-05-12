@@ -1,0 +1,7 @@
+- title @page.title
+%section#projects
+  .page-header
+    %h1
+      = @page.title
+  %p
+    = RedCloth.new(@page.content).to_html.html_safe

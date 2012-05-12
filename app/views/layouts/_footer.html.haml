@@ -1,0 +1,21 @@
+.clearfix
+%hr    
+  %footer
+    %p.pull-right 
+      &copy; 2012 Bohdan Shevchuk
+      - if !user_signed_in?
+        %br
+        = link_to "English", "?locale=en"
+        \/
+        = link_to "Українська", "?locale=uk"
+    %p
+      = t('page.copyright')
+    %p
+      = link_to t('page.about'), page_path(:about, :locale => I18n.locale)
+      |
+      = link_to t('page.terms'), page_path(:terms, :locale => I18n.locale)
+      /
+        |
+        = link_to t('page.help'), "/help"
+
+  

@@ -1,0 +1,24 @@
+%ul.dropdown-menu
+  %li
+    = link_to project_path(project) do
+      %i.icon-eye-open
+      = t('action.show')
+  %li
+    = link_to edit_project_path(project) do
+      %i.icon-pencil
+      = t('action.edit')
+  %li.divider
+  %li
+    = link_to members_path do
+      %i.icon-share
+      = t('action.share')
+  %li
+    = link_to "#team" do
+      %i.icon-user
+      = t('action.team')
+  %li.divider
+  %li
+    = link_to project, confirm: t('action.confirm-delete', :name => project.name), :method => :delete, :remote => false, :class => 'delete_project' do
+      %i.icon-trash
+      = t('action.delete')
+

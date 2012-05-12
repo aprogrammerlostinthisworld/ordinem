@@ -5,7 +5,7 @@ gem 'rails', '3.2.3'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
+
 gem 'cancan'
 gem 'simple_form'
 gem 'devise'
@@ -61,6 +61,7 @@ group :production do
 end
 
 group :development do
+  gem 'sqlite3-ruby', :require => "sqlite3"
   gem 'hpricot'
   gem 'ruby_parser'
 #  gem 'annotate'

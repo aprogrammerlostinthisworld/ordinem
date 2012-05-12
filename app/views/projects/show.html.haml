@@ -1,0 +1,74 @@
+- title @project.name
+%section#projects
+  .page-header
+    .row-fluid
+      .span9
+        %h1
+          = @project.name
+      .snap3
+        .btn-toolbar  
+          .btn-group.pull-right 
+            = link_to edit_project_path(@project), :class => 'btn btn-success' do
+              %i.icon-pencil
+              = t('action.edit')
+            = link_to @project, confirm: t('action.confirm-delete', :name => @project.name), method: :delete, :class => 'btn btn-danger'  do
+              %i.icon-trash
+              = t('action.delete') 
+  
+  .row-fluid
+    .span10
+      %dl.dl-horizontal
+        %dt 
+          = t('project.name')
+        %dd 
+          = @project.name
+        
+        %dt 
+          = t('project.description')
+        %dd 
+          = @project.description
+        
+        %dt 
+          = t('project.goal')
+        %dd 
+          = @project.goal
+      .clearfix            
+      .page-header 
+        .row-fluid
+          .span2
+            %h3
+              = t('task.tasks')
+          .span4.pull-right
+            = render 'tasks/status'
+          .span3{:style => 'margin-top:8px'}
+            = render :partial => 'projects/progress_bar', :locals => { :project => current_project }  
+          .span3
+            = link_to new_task_path({:task => {:tasktable_id => current_project.id, :tasktable_type => "Project"}, :project_id => current_project.id}), :class => 'btn btn-primary pull-right' do
+              %i.icon-plus
+              = t('task.create')
+      .row-fluid
+        .span12#tasks
+          -#= render 'tasks/tasks'
+          = render :partial => "tasks/task", :collection => current_project.tasks
+    
+    .span2
+      .page-header
+        .row-fluid
+          .span8
+            %h3 
+              = t('member.members')
+          .span4
+            .btn-group.pull-right 
+              %a.btn.btn-header.dropdown-toggle{"data-toggle" => "dropdown"}
+                %i.icon-cog
+                %span.caret
+              %ul.dropdown-menu
+                %li
+                  = link_to members_path do
+                    %i.icon-share
+                    = t('action.share')
+
+            
+      %ul.nav.nav-pills.nav-stacked
+        %li
+          = link_to @project.user.display_name, [@project.user]

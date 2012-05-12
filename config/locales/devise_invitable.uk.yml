@@ -1,0 +1,10 @@
+uk:
+  devise:
+    invitations:
+      send_instructions: 'Запрошення було віправлено на %{email}.'
+      invitation_token_invalid: 'Ключ запрошення не є валідним'
+      updated: 'Ваш пароль був успішно встановлений. Зараз ви можете ввійти.'
+      no_invitations_remaining: "Не залишилось запрошень."
+    mailer:
+      invitation_instructions:
+        subject: 'Інструкції запрошення'

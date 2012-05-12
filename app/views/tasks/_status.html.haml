@@ -1,0 +1,7 @@
+.btn-group{"data-toggle" => "buttons-radio"}
+  = link_to "#", :class => 'btn active', :id => "btn-all" do
+    = t('task.all')
+  = link_to "#", :class => 'btn', :id => "btn-incompleted" do
+    = t('task.incompleted')
+  = link_to "#", :class => 'btn', :id => "btn-completed" do
+    = t('task.completed')

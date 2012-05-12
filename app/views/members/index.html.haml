@@ -1,0 +1,21 @@
+%ul#myTabConte.nav.nav-tabs
+  %li.active
+    %a{"data-toggle" => "tab", :href => "#list"} 
+      = t('member.list')
+  %li
+    %a{"data-toggle" => "tab", :href => "#share"} 
+      = t('member.invite')
+
+#myTabContend.tab-content
+  #list.tab-pane.active
+    = render 'members/list'
+  #share.tab-pane
+    = form_tag @member, remote: false do |f|
+      .control-group
+        = label_tag :email, t('user.email'), :class => 'control-label'
+        .controls  
+          = text_field_tag :email
+      
+      .form-actions
+        = submit_tag t('member.add'), :class => 'btn-success btn-large'
+

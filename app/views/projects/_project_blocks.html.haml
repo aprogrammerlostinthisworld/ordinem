@@ -1,0 +1,27 @@
+.project
+  - @projects.each_slice(3) do |project|
+    .row-fluid
+      - project.each do |project|
+        .span4
+          %h3
+            = link_to project.name, [project]
+          %p
+            = project.description
+          .row-fluid
+          
+            .span2
+              = "#{project.tasks_complete_counter} / #{project.tasks_counter}" 
+            .span8
+              = render :partial => 'projects/progress_bar', :locals => { :project => project }  
+            .span2
+              .btn-group.pull-right
+                /
+                  %a.btn.btn-mini{:href => project_path(project) } 
+                    View
+                %a.btn.btn-mini.btn-header.dropdown-toggle{"data-toggle" => "dropdown"}
+                  %i.icon-cog
+                  %span.caret
+                = render :partial => 'projects/actions', :locals => { :project => project }  
+
+   
+  

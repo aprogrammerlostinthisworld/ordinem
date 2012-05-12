@@ -1,0 +1,3 @@
+.progress.progress-info
+  .bar{:style => "width: #{((project.tasks_complete_counter.to_f/project.tasks_counter)*100).to_i if project.tasks_counter != 0}%;"}
+        

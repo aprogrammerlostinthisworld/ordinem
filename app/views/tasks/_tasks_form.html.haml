@@ -1,0 +1,66 @@
+%br
+= form_for(@task, :html => { :class => "form-horizontal"}) do |f|
+  - if @task.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@task.errors.count, "error")
+        prohibited this post from being saved:
+      %ul
+        - @taskerrors.full_messages.each do |msg|
+          %li= msg
+  .control-group
+    = f.label :name, t('task.name'), :class => 'control-label'
+    .controls
+      = f.text_field :name, :required => true, :class => 'span5'
+      
+  .control-group
+    = f.label :description, t('task.description'), :class => 'control-label'
+    .controls
+      = f.text_area :description, :rows => 10, :class => 'span5'  
+      
+  .control-group
+    = f.label t('task.priority'), :class => 'control-label'
+    .controls
+      
+      = f.label :priority, :value => 0, :class => 'radio'  do
+        = f.radio_button :priority, 0, :checked => true
+        = t('task.low')    
+      = f.label :priority, :value => 1, :class => 'radio'  do
+        = f.radio_button :priority, 1
+        = t('task.medium')
+      = f.label :priority, :value => 2, :class => 'radio'  do
+        = f.radio_button :priority, 2
+        = t('task.hight')
+        
+    .control-group
+      = f.label t('dates'), :class => 'control-label'
+      .controls
+        = f.text_field :date_from, :class => 'span2', :id => "from", :class=> "datepicker" 
+        = f.text_field :date_to, :class => 'span2', :id => "to", :class=> "datepicker"   
+      
+  - if !@task.new_record?  
+    .control-group
+      = f.label t('task.status'), :class => 'control-label'
+      .controls
+        = f.label :status, :value => 0, :class => 'radio'  do
+          = f.radio_button :status, 0
+          = t('task.active')
+        = f.label :status, :value => -1, :class => 'radio' do
+          = f.radio_button :status, -1
+          = t('task.hold')
+        = f.label :status, :value => 1, :class => 'radio'  do
+          = f.radio_button :status, 1
+          = t('task.complete')
+                
+    
+  - unless params[:task] && params[:task][:tasktable_id] && params[:task][:tasktable_type]
+    = f.hidden_field :tasktable_id,    :value => current_project.id
+    = f.hidden_field :tasktable_type,  :value => "Project"
+  - else
+    = f.hidden_field :tasktable_id,    :value => params[:task][:tasktable_id]
+    = f.hidden_field :tasktable_type,  :value => params[:task][:tasktable_type]
+  = hidden_field_tag :project_id, params[:project_id] ? params[:project_id] : @project.id
+  = f.hidden_field :user_id,    :value => current_user.id
+   
+  .form-actions
+    = f.submit t('task.create'), :class => 'btn-success btn-large'

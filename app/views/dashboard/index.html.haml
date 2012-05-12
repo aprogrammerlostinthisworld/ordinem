@@ -1,0 +1,58 @@
+- title current_project.name
+%section#dashboard
+  .page-header
+    .row-fluid
+      .span9
+        .subnav.subnav-fixed
+          %ul.nav.nav-pills
+                      
+            %li.dropdown
+              %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+                %h2
+                  %b.caret{:style => 'margin-top:15px'}
+                  = current_project.name
+              = render :partial => 'projects/actions', :locals => { :project => current_project }
+                            
+      .span3
+        .pull-right{:style => 'margin-top:15px'}
+          = render 'tasks/status'
+
+  .row-fluid
+    .span2
+      .sidebar-nav
+        %ul.nav.nav-list
+          %li.nav-header 
+            = t('task.task')
+          %li
+            = link_to new_task_path({:task => {:tasktable_id => current_project.id, :tasktable_type => "Project"}, :project_id => current_project.id}) do
+              %i.icon-plus
+              = t('task.create')    
+          %li
+            %hr
+          %li.dropdown.nav-header 
+            %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+              %i.icon-book
+              = t('project.projects')
+              %b.caret
+            = render :partial => 'projects/projects_list'
+          %li
+            = link_to edit_project_path(current_project) do
+              %i.icon-pencil
+              = t('action.edit')
+          %li.nav-header
+            = t('progress')
+            = render :partial => 'projects/progress_bar', :locals => { :project => current_project } 
+          - unless current_project.date_to.nil?  
+            %li.nav-header  
+              = t('expiration_date')
+            %li
+              = l(current_project.date_to, :format => :long)
+         
+   
+    .span10
+      .row-fluid
+        .span12
+          = render 'tasks/tasks'
+      
+
+

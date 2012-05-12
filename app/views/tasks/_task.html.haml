@@ -1,0 +1,78 @@
+.task{:class => task.complete? ? "task_complete" : "task_incomplete"}
+  .row-fluid.task-header
+    .span9
+      - if task.complete?
+        %span.badge.badge-info
+          = t('task.complete')
+      - if task.hold?
+        %span.badge
+          = t('task.hold')
+      %span
+        &nbsp;
+        %b 
+          = task.name
+      %br
+      [#{link_to task.user.display_name, task.user}, #{l(task.created_at, :format => :short)} ]
+      - if task.low?
+        %span.label
+          = t('task.low')
+      - elsif task.medium?
+        %span.label.label-success
+          = t('task.medium')
+      - else
+        %span.label.label-important
+          = t('task.hight')
+    .span3
+      .btn-group.pull-right
+        - if task.incomplete? 
+          %a.btn{:href => "#get" } 
+            = t('task.get_to_perform')
+        %a.btn.dropdown-toggle{"data-toggle" => "dropdown"}
+          %i.icon-cog
+          %span.caret
+      
+        %ul.dropdown-menu
+          %li
+            = link_to "#" do
+              %i.icon-eye-open
+              = t('action.show')
+          - unless task.complete?  
+            %li
+              = link_to new_task_path({:task => {:tasktable_id => task.id, :tasktable_type => "Task"}, :project_id => current_project.id})  do
+                %i.icon-plus
+                = t('task.create-subtask')
+            %li.divider
+            - unless task.complete?
+              %li
+                = link_to set_complete_task_path(task) do
+                  %i
+                  Set complete
+            - unless task.hold?
+              %li
+                = link_to "#setHold" do
+                  %i
+                  Set hold
+              
+          - if task.user == current_user
+            %li.divider
+            %li
+              = link_to edit_task_path(task, { :project_id => current_project.id }) do 
+                %i.icon-pencil
+                = t('action.edit')
+            %li 
+              = link_to task_path(task, { :project_id => current_project.id }), :method => :delete, confirm: t('action.confirm-delete', :name => task.name), :remote => true, :class=>'delete_task'  do 
+                %i.icon-trash
+                = t('action.delete')
+
+
+        
+        
+  - if !task.description.blank?
+    .row-fluid
+      .task-text
+        = task.description
+  -#= link_to "subtask", new_task_path({:task => {:tasktable_id => task.id, :tasktable_type => "Task"}, :project_id => current_project.id}) 
+  = render :partial => "tasks/task", :collection => task.tasks
+  
+
+

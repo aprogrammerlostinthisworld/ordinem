@@ -1,0 +1,19 @@
+%ul.dropdown-menu
+  - if !current_user.projects.empty?
+    - current_user.projects.each do |project|
+      %li
+        = link_to project_path(project) do
+          - if current_project == project
+            %i.icon-chevron-right 
+          - else
+            %i  
+          = project.name
+    %li.divider    
+    %li
+      = link_to projects_path do
+        %i.icon-list
+        = t('project.list')
+  %li
+    = link_to new_project_path do
+      %i.icon-plus-sign
+      = t('project.create')
