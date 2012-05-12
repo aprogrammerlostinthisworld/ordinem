@@ -4,16 +4,19 @@ class Project < ActiveRecord::Base
     
   validates :name, :presence => true
   
-  belongs_to :user
+  belongs_to :user 
+  
   has_many :tasks,  :as => :tasktable, :dependent => :destroy
-  has_many :members
-  has_many :peoples, :through => :members
+  has_many :collaborations
+  has_many :members, :through => :collaborations
+  
+  # belongs_to :owner, :class_name => 'User'
 
-  #belongs_to :author, :class_name => 'User'
+  
   default_scope :order => 'projects.created_at DESC'
 
-  def membs
-    peoples.all << user
+  def collaborators
+    members.all << user
   end
   
   def active?

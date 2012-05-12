@@ -26,6 +26,10 @@ $(document).ready(function(){
   })
   $('.external').attr('target', '_blank'); //for textile link
   
+  var query = location.href.split('#');
+  if (query[1] == "invite") {
+    $('#collaborations a[href="#invite"]').tab('show'); 
+  }
 
   
   $('.delete_task').bind('ajax:success', function() {  

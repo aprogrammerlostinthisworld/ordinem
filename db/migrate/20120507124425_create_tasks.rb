@@ -11,7 +11,7 @@ class CreateTasks < ActiveRecord::Migration
 
       
       t.integer    :updated_by_id
-      t.datetime   :completed_on
+      t.datetime   :completed_at
       t.integer    :completed_by_id
       
       t.integer    :tasktable_id,     :null => false

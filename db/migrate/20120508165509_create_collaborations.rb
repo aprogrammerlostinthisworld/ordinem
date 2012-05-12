@@ -1,6 +1,6 @@
-class CreateMembers < ActiveRecord::Migration
+class CreateCollaborations < ActiveRecord::Migration
   def change
-    create_table :members do |t|
+    create_table :collaborations do |t|
       t.references  :project
       t.references  :user              
   

@@ -3,6 +3,7 @@ uk:
   dashboard: Огляд
   
   update: Оновити
+  save: Зберегти
   name: Назва
   description: Опис
   dates: Строки
@@ -14,13 +15,13 @@ uk:
   progress: Прогрес
   expiration_date: Дата завершення
 
-  member:
-    members: Користувачі
+  collaborator:
+    collaborators: Співробітники
     add: Додати нового
     name: Ім’я
     invite: Запросити
     has_tasks: Має завдання
-    list: Всі користувачі
+    list: Всі співробітники
 
   # Actions
   action:
@@ -36,6 +37,7 @@ uk:
     task: Завдання
     tasks: Завдання
     name: Назва
+    description: Опис проекту
     new_task: Нове завдання
     edit_task: Редагувати завдання
     create: Створити завдання
@@ -47,6 +49,7 @@ uk:
     get_to_perform: Взяти на виконання
     set_as_comleted: Встановити як завершений
     set_as_hold: Встановити як заморожений
+    status: Статус
     hold: Заморожено
     complete: Виконано
     active: Активно
@@ -68,6 +71,8 @@ uk:
     create: Створити проект
     new_project: Новий проект
     edit_project: Редавування проекту
+    active: Активний
+    completed: Завершений
     
   # Page
   page:

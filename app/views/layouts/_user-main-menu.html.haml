@@ -10,12 +10,9 @@
         = current_project.blank? ?  t('project.projects') : current_project.name
         %b.caret
       = render :partial => 'projects/projects_list'
-    %li{:class => (controller.controller_name == "members" ? 'active' : nil) }
-      = link_to members_path do
-        = t('member.members')
-    %li
-      = link_to "#calendars" do
-        Calendar
+    %li{:class => (controller.controller_name == "collaborations" ? 'active' : nil) }
+      = link_to collaborations_path do
+        = t('collaborator.collaborators')
     %li.divider-vertical
     %li.dropdown
       %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
@@ -37,28 +34,6 @@
           = link_to destroy_user_session_path, method: :delete do
             %i.icon-off
             = t('user.sign_out')
-  /
-    .pull-right
-      .btn-group
-        %a.btn.btn-info.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-          %i.icon-user
-          
-          %span.caret
-        %ul.dropdown-menu
-          %li
-            = link_to edit_user_registration_path do
-              %i.icon-user
-              Profile
-          %li.divider
-          %li
-            = link_to destroy_user_session_path, method: :delete do
-              %i.icon-off
-              Sign out
-
-
-
-    
-     
 
 
 
