@@ -11,11 +11,15 @@ class User < ActiveRecord::Base
                   :home_number, :mobile_number, :fax_number, :office_number,
                   :locale, :is_admin
                   
-                  
-  # validates :current_password, :presence => TRUE, :if => :email_changed?
-  
   has_many :projects, :dependent => :destroy
+  # has_many :collaborations
   
+  def all_projects
+    collaborations.map(&:project) | Project.where(:user_id => id)
+  end
+  
+
+ 
   def display_name
     if self.first_name? and self.last_name? then
       "#{self.first_name} #{self.last_name}"

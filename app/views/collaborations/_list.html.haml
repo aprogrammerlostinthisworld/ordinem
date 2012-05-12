@@ -1,0 +1,20 @@
+%table.table
+  %thead
+    %tr
+      %th 
+        = t('collaborator.name')
+      %th
+        = t('collaborator.has_tasks')
+      %th
+        invited at
+      
+  %tbody
+  - @members.each do |m|
+    %tr
+      %td 
+        = m.display_name
+      %td
+        = current_project.permissions_for(m).can_manage_tasks
+      %td 
+        
+  

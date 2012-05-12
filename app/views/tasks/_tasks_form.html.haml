@@ -32,13 +32,13 @@
         = f.radio_button :priority, 2
         = t('task.hight')
         
-    .control-group
-      = f.label t('dates'), :class => 'control-label'
-      .controls
-        = f.text_field :date_from, :class => 'span2', :id => "from", :class=> "datepicker" 
-        = f.text_field :date_to, :class => 'span2', :id => "to", :class=> "datepicker"   
+  .control-group
+    = f.label t('dates'), :class => 'control-label'
+    .controls
+      = f.text_field :date_start, :class => 'span2', :id => "from", :class=> "datepicker" 
+      = f.text_field :date_due, :class => 'span2', :id => "to", :class=> "datepicker"   
       
-  - if !@task.new_record?  
+  - unless @task.new_record?  
     .control-group
       = f.label t('task.status'), :class => 'control-label'
       .controls
@@ -63,4 +63,4 @@
   = f.hidden_field :user_id,    :value => current_user.id
    
   .form-actions
-    = f.submit t('task.create'), :class => 'btn-success btn-large'
+    = f.submit t('save'), :class => 'btn-success btn-large'

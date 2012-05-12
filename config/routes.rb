@@ -26,7 +26,7 @@ Ordinem::Application.routes.draw do
     end
   end
   resources :projects 
-  resources :members, :only => [:index, :create, :destroy]
+  resources :collaborations, :only => [:index, :create, :destroy]
   
   
 

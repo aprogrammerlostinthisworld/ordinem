@@ -28,9 +28,9 @@ class Ability
      #     obj.new_record? || user.projects.include?(obj.project)
      #   end
      # end
-     # can :delete, Collaboration do |rec|
-     #  rec.project.author == user
-     # end
+      can :delete, Collaboration do |rec|
+        rec.project.user == user
+      end
     end
     
     

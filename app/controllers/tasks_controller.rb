@@ -26,6 +26,7 @@ class TasksController < ApplicationController
   
   def create
     @task = Task.new(params[:task])
+   # @task.owner = current_user
     if @task.save
       # redirect_to(@task.project, :notice => 'Comment was successfully created.')
       redirect_to(project_path(params[:project_id]), :notice => 'Task was successfully created.')

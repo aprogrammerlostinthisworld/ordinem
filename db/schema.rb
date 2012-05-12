@@ -13,9 +13,9 @@
 
 ActiveRecord::Schema.define(:version => 20120510121133) do
 
-  create_table "members", :force => true do |t|
+  create_table "collaborations", :force => true do |t|
     t.integer  "project_id"
-    t.integer  "user_id"
+    t.integer  "member_id"
     t.boolean  "can_manage_tasks", :default => false
     t.datetime "created_at",                          :null => false
     t.datetime "updated_at",                          :null => false
@@ -66,7 +66,7 @@ ActiveRecord::Schema.define(:version => 20120510121133) do
     t.datetime "date_start"
     t.datetime "date_due"
     t.integer  "updated_by_id"
-    t.datetime "completed_on"
+    t.datetime "completed_at"
     t.integer  "completed_by_id"
     t.integer  "tasktable_id",                   :null => false
     t.string   "tasktable_type",                 :null => false

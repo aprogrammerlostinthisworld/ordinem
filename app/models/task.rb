@@ -1,14 +1,16 @@
 class Task < ActiveRecord::Base
   attr_accessible :name, :priority, :description, :status,
+                  :date_start, :date_due,
                   :tasktable_id, :tasktable_type, :user_id
-  after_create :increment_tasks
+  after_create  :increment_tasks
   after_destroy :decrement_tasks
-  after_update :update_tasks_counts
-  
+  after_update  :update_tasks_counts
+  # after_save :notify
   
   validates :name, :presence => true
   validates :tasktable_id, :presence => true
   
+  #belongs_to :project
   belongs_to :user
   belongs_to :tasktable, :polymorphic => true
   has_many   :tasks,     :as => :tasktable, :dependent => :destroy
@@ -72,6 +74,9 @@ class Task < ActiveRecord::Base
     end
   end
   
+
+  
+
   private
   
     def tasks_project(task)
@@ -81,4 +86,13 @@ class Task < ActiveRecord::Base
         return tasks_project(task.tasktable)
       end
     end
+    
+ # def notify
+ #   if assigned_id_changed?
+ #     Mailer.delay.reassign(assigned, self)
+ #   elsif status_changed?
+ #     Mailer.delay.status(assigned, author, self)
+ #   end
+ # end
+    
 end
