@@ -18,10 +18,15 @@ class Ability
     
     unless user.new_record?
       can :manage, Project, :user_id => user.id
-     # can :read, Project do |project|
-     #   project.users.include? user
-     # end
+      can :read, Project do |project|
+        project.members.include? user
+      end
+      
        can :manage, Task, :user_id => user.id
+     #  can :view, Task do
+     #     view_context.current_project.user == user
+     #     view_context.current_project.permissions_for(user).can_view_tasks?
+     #  end
      # [Task, List].each do |klass|
      
      #   can :manage, klass do |obj|

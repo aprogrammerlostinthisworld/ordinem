@@ -1,31 +1,32 @@
-%ul#collaborations.nav.nav-tabs
-  %li.active
-    %a{"data-toggle" => "tab", :href => "#list"} 
-      = t('collaboration.list')
-  %li
-    %a{"data-toggle" => "tab", :href => "#invite"} 
-      = t('collaboration.invite')
-
-.tab-content
-  #list.tab-pane.active
-    #no_data{:style => (@collaborations.count == 0)  ? "" : "display: none"}
-      %p
-        = t('collaboration.empty')
-    = render 'collaborations/list', :object => @members if @collaborations.count != 0 
-
-  #invite.tab-pane
-    = form_for @collaboration, :html => { :class => "form-horizontal" } do |f|
-      .control-group
-        = f.label :email, t('user.email'), :class => 'control-label'
-        .controls
-          = f.email_field :email
-          
-      .control-group
-        = f.label :role_id, t('collaboration.role'), :class => 'control-label'
-        .controls
-          = f.collection_select :role_id, Role.all, :id, :name
-          
-      .form-actions
-        = f.submit t('collaboration.add'), :class => 'btn-success btn-large'
+- if current_project.permissions_for(current_user).can_view_collaborators?
+  %ul#collaborations.nav.nav-tabs
+    %li.active
+      %a{"data-toggle" => "tab", :href => "#list"} 
+        = t('collaboration.list')
+    %li
+      %a{"data-toggle" => "tab", :href => "#invite"} 
+        = t('collaboration.invite')
+  
+  .tab-content
+    #list.tab-pane.active
+      #no_data{:style => (@collaborations.count == 0)  ? "" : "display: none"}
+        %p
+          = t('collaboration.empty')
+      = render 'collaborations/list', :object => @members if @collaborations.count != 0 
+  
+    #invite.tab-pane
+      = form_for @collaboration, :html => { :class => "form-horizontal" } do |f|
+        .control-group
+          = f.label :email, t('user.email'), :class => 'control-label'
+          .controls
+            = f.email_field :email
+            
+        .control-group
+          = f.label :role_id, t('collaboration.role'), :class => 'control-label'
+          .controls
+            = f.collection_select :role_id, Role.all, :id, :name
+            
+        .form-actions
+          = f.submit t('collaboration.add'), :class => 'btn-success btn-large'
 
 

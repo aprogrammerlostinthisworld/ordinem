@@ -6,6 +6,38 @@ en:
   dashboard: Dashboard
   
   update: Update
+  save: Save
+  name: Name
+  description: Description
+  dates: Dates
+  
+  general: General
+  contacts: Contacts
+  account: Account
+
+  progress: Progress
+  duration: Duration
+  begin_date: Date begin
+  expiration_date: Expiration date
+  created: Created
+  completed: Completed
+  at: at
+
+
+  # Collaboration 
+  collaboration:
+    collaborators: Collaborators
+    add: Add new
+    name: Name
+    invite: Invite
+    role: Role
+    unshare: Unshare...
+    empty: No collaborators
+    list: List
+    invited: User %{email} invited to the project
+    user_removed: User removed from project
+    already_invited: User %{email} now in project
+    invited_at: Invited at
 
   # Actions
   action:
@@ -27,6 +59,19 @@ en:
     all: All
     completed: Completed
     incompleted: Incompleted
+    tasks: Tasks
+    name: Name
+    description: Description
+    new_task: New task
+    edit_task: Edit tasks
+    state: State
+    set_as_comleted: Set as complete
+    status: Status
+ 
+    priority: Priority
+    low: Low
+    medium: Medium
+    hight: Hight
   
   # Project
   project:
@@ -34,12 +79,22 @@ en:
     projects: Projects
     list: Project list
     create: Create project
+    name: Project name
+    state: state
+    goal: Project goal
+    description: Description
+    new_project: New project
+    edit_project: Edit project
+    active: Active
+    completed: Completed
+    
   # Page
   page:
     copyright: All right reserved
     about:  About Us
-    licence: Licence
+    terms: Terms
     help:  Help
+
   
   # User
   user:
@@ -58,3 +113,5 @@ en:
     forgot_password: Forgot you password?
     profile: Profile
     sign_up_slogan: Create you personal account
+
+

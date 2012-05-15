@@ -1,6 +1,6 @@
 .task{:class => task.complete? ? "task_complete" : "task_incomplete"}
   .row-fluid.task-header
-    .span1
+    .span2
       - if task.complete?
         %span.badge.badge-info
           = t('task.complete')
@@ -17,7 +17,7 @@
       - else
         %span.label.label-important
           = t('task.hight')  
-    .span8    
+    .span7   
       .row-fluid
         .span12
           %b 
@@ -40,20 +40,21 @@
             = task.duration
         
     .span3
-      - unless task.complete? 
-        = form_tag set_complete_tasks_path, :method => :put do 
-          = hidden_field_tag :task_id,  task.id
+      - if current_project.permissions_for(current_user).can_manage_tasks?
+        - unless task.complete? 
+          = form_tag set_complete_tasks_path, :method => :put do 
+            = hidden_field_tag :task_id,  task.id
+            .btn-group.pull-right
+              = submit_tag t('task.set_as_comleted'), :class => "btn btn-header"
+              = render :partial => 'tasks/actions', :locals => { :task => task }
+        - else
           .btn-group.pull-right
-            = submit_tag t('task.set_as_comleted'), :class => "btn btn-header"
-            = render :partial => 'tasks/actions', :locals => { :task => task }
-      - else
-        .btn-group.pull-right
-          = render :partial => 'tasks/actions', :locals => { :task => task } 
+            = render :partial => 'tasks/actions', :locals => { :task => task } 
 
 
         
         
-  - if !task.description.blank?
+  - unless task.description.blank?
     .row-fluid
       .task-text
         = task.description

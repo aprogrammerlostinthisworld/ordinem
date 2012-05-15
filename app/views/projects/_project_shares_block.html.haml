@@ -1,0 +1,32 @@
+.project
+  - projects.each_slice(3) do |project|
+    .row-fluid
+      - project.each do |project|
+        .span6
+          %h3
+            = link_to project.name, [project]
+          %p
+            = project.description
+            
+          .row-fluid
+            .span2
+              = "#{project.tasks_complete_counter} / #{project.tasks_counter}" 
+            .span5
+              = render :partial => 'projects/progress_bar', :locals => { :project => project }
+            .span2
+              .pull-right
+                %i.icon-user
+                = "#{project.collaborations.count} "
+            .span3
+              = t('collaboration.role')
+              \:
+              = project.permissions_for(current_user).name
+        
+            - unless project.date_to.blank?
+              .row-fluid
+                .span12
+                  = l(project.date_to, :format => :long) unless project.date_to.blank?
+                  \-
+                  = l(project.date_to, :format => :long)
+   
+  

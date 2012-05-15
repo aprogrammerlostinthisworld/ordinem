@@ -21,7 +21,7 @@
     .span2
       .sidebar-nav
         %ul.nav.nav-list
-          - if current_project.active?
+          - if current_project.active? && current_project.permissions_for(current_user).can_manage_tasks?
             %li.nav-header 
               = t('task.task')
             %li

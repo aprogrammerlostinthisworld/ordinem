@@ -10,21 +10,14 @@ class Task < ActiveRecord::Base
   validates :name, :presence => true
   validates :tasktable_id, :presence => true
   
+  default_scope :order => 'tasks.priority DESC'
+
   #belongs_to :project
   belongs_to :user
   belongs_to :tasktable, :polymorphic => true
   has_many   :tasks,     :as => :tasktable, :dependent => :destroy
   
   
-  
-  #scope :named, lambda {|arg| { if :conditions => ["LOWER(#{table_name}.name) = LOWER(?)", arg.to_s.strip]}}
- 
-  scope :completed, where(:status => 1)
-  scope :incompeted, where(:status != 1) 
-  
-  scope :complete, where(:status => 1) 
-  scope :incomplete, where(:state => 0)
-
   def complete?
     true if self.status == 1 
   end

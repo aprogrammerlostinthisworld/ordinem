@@ -10,6 +10,7 @@
         = current_project.blank? ?  t('project.projects') : current_project.name
         %b.caret
       = render :partial => 'projects/projects_list'
+    
     %li{:class => (controller.controller_name == "collaborations" ? 'active' : nil) }
       = link_to collaborations_path do
         = t('collaborator.collaborators')

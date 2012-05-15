@@ -6,17 +6,18 @@
         %h1
           = @project.name
       .snap3
-        .btn-toolbar  
-          .btn-group.pull-right 
-            = link_to edit_project_path(@project), :class => 'btn btn-success' do
-              %i.icon-pencil
-              = t('action.edit')
-            = link_to @project, confirm: t('action.confirm-delete', :name => @project.name), method: :delete, :class => 'btn btn-danger'  do
-              %i.icon-trash
-              = t('action.delete') 
+        - if current_project.permissions_for(current_user).can_view_collaborators?
+          .btn-toolbar  
+            .btn-group.pull-right 
+              = link_to edit_project_path(@project), :class => 'btn btn-success' do
+                %i.icon-pencil
+                = t('action.edit')
+              = link_to @project, confirm: t('action.confirm-delete', :name => @project.name), method: :delete, :class => 'btn btn-danger'  do
+                %i.icon-trash
+                = t('action.delete') 
   
   .row-fluid
-    .span10
+    .span9
       %dl.dl-horizontal
         %dt 
           = t('project.name')
@@ -48,26 +49,27 @@
             = @project.date_to
       
           
-      .clearfix            
-      .page-header 
+      .clearfix
+      - if current_project.permissions_for(current_user).can_view_tasks?
+        .page-header 
+          .row-fluid
+            .span2
+              %h3
+                = t('task.tasks')
+            .span4.pull-right
+              = render 'tasks/status'
+            .span3{:style => 'margin-top:8px'}
+              = render :partial => 'projects/progress_bar', :locals => { :project => current_project }  
+            .span3
+              - if current_project.active? && current_project.permissions_for(current_user).can_manage_tasks?
+                = link_to new_task_path({:task => {:tasktable_id => current_project.id, :tasktable_type => "Project"}, :project_id => current_project.id}), :class => 'btn btn-primary pull-right' do
+                  %i.icon-plus
+                  = t('task.create')
         .row-fluid
-          .span2
-            %h3
-              = t('task.tasks')
-          .span4.pull-right
-            = render 'tasks/status'
-          .span3{:style => 'margin-top:8px'}
-            = render :partial => 'projects/progress_bar', :locals => { :project => current_project }  
-          .span3
-            - if current_project.active?
-              = link_to new_task_path({:task => {:tasktable_id => current_project.id, :tasktable_type => "Project"}, :project_id => current_project.id}), :class => 'btn btn-primary pull-right' do
-                %i.icon-plus
-                = t('task.create')
-      .row-fluid
-        .span12#tasks
-          = render :partial => "tasks/task", :collection => current_project.tasks
+          .span12#tasks
+            = render :partial => "tasks/task", :collection => current_project.tasks
     
-    .span2
+    .span3
       .page-header
         .row-fluid
           .span8
@@ -86,10 +88,15 @@
             
       %ul.nav.nav-pills.nav-stacked
         %li
-          = link_to @project.user.display_name, "#"
-        - if @collaborations.count != 0
+          = link_to  "#" do
+            = @project.user.display_name
+            %span.badge.badge-info Manager
+        - if @collaborations.count != 0 && current_project.permissions_for(current_user).can_view_collaborators?
           - @collaborations.each do |c|
             - unless c.nil?
               %li
-                = link_to c.member.display_name, "#"
+                = link_to  "#" do
+                  = c.member.display_name
+                  %span.badge.badge-info 
+                    = c.role.name
             
