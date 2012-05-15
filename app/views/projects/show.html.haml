@@ -23,15 +23,31 @@
         %dd 
           = @project.name
         
-        %dt 
-          = t('project.description')
-        %dd 
-          = @project.description
+        - unless @project.description.nil?  
+          %dt 
+            = t('project.description')
+          %dd 
+            = @project.description
+         
+        - unless @project.goal.nil? 
+          %dt 
+            = t('project.goal')
+          %dd 
+            = @project.goal
         
-        %dt 
-          = t('project.goal')
-        %dd 
-          = @project.goal
+        - unless @project.date_from.nil?
+          %dt
+            = t('project.date_from')
+          %dd
+            = @project.date_from
+            
+        - unless @project.date_to.nil?
+          %dt
+            = t('expiration_date')
+          %dd
+            = @project.date_to
+      
+          
       .clearfix            
       .page-header 
         .row-fluid
@@ -43,12 +59,12 @@
           .span3{:style => 'margin-top:8px'}
             = render :partial => 'projects/progress_bar', :locals => { :project => current_project }  
           .span3
-            = link_to new_task_path({:task => {:tasktable_id => current_project.id, :tasktable_type => "Project"}, :project_id => current_project.id}), :class => 'btn btn-primary pull-right' do
-              %i.icon-plus
-              = t('task.create')
+            - if current_project.active?
+              = link_to new_task_path({:task => {:tasktable_id => current_project.id, :tasktable_type => "Project"}, :project_id => current_project.id}), :class => 'btn btn-primary pull-right' do
+                %i.icon-plus
+                = t('task.create')
       .row-fluid
         .span12#tasks
-          -#= render 'tasks/tasks'
           = render :partial => "tasks/task", :collection => current_project.tasks
     
     .span2
@@ -56,7 +72,7 @@
         .row-fluid
           .span8
             %h3 
-              = t('collaborator.collaborators')
+              = t('collaboration.collaborators')
           .span4
             .btn-group.pull-right 
               %a.btn.btn-header.dropdown-toggle{"data-toggle" => "dropdown"}
@@ -67,8 +83,13 @@
                   = link_to collaborations_path + "#invite" do
                     %i.icon-share
                     = t('action.share')
-
             
       %ul.nav.nav-pills.nav-stacked
         %li
-          = link_to @project.user.display_name, [@project.user]
+          = link_to @project.user.display_name, "#"
+        - if @collaborations.count != 0
+          - @collaborations.each do |c|
+            - unless c.nil?
+              %li
+                = link_to c.member.display_name, "#"
+            

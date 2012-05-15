@@ -10,8 +10,17 @@
 
 def setup
 
+  if Role.count == 0
+    puts '*** Creating Role''s ***'
+    
+    Role.create!(:name => 'Guest')
+    Role.create!(:name => 'Client', :can_view_tasks => true)
+    Role.create!(:name => 'Employee', :can_view_tasks => true, :can_manage_tasks => true)
+    Role.create!(:name => 'Manager', :can_view_tasks => true, :can_manage_tasks => true, :can_view_collaborators => true)
+  end
+
  
-  #if Page.count == 0
+  if Page.count == 0
     puts '*** Creating static pages ***'
     
     Page.delete_all # debug
@@ -21,11 +30,11 @@ def setup
 *Ordinem* is a simplified project management system and created as bachelor diploma
 
 h1. Thirth parties
-*Ordinem* writen on "Ruby":http://ruby-lang.org with "Ruby on Rails":http://rubyonrails.org framework
+*Ordinem* writen on "(external) Ruby":http://ruby-lang.org with "(external) Ruby on Rails":http://rubyonrails.org framework
  
 See source's on github: https://github.com/deodatus/ordinem.git
 
-As CSS-framework used "Twitter Bootstrap":http://twitter.github.com/bootstrap
+As CSS-framework used "(external) Twitter Bootstrap":http://twitter.github.com/bootstrap
 ABOUT_EN
 
     
@@ -36,7 +45,7 @@ ABOUT_EN
 
 h1. Треті сторони
 
-*Ordinem* написаний на "(external) Ruby":http://ruby-lang.org з використанням фреймворуку "Ruby on Rails":http://rubyonrails.org.
+*Ordinem* написаний на "(external) Ruby":http://ruby-lang.org з використанням фреймворуку "(external) Ruby on Rails":http://rubyonrails.org.
  
 Коди проекту Ви можете подивитись на github: "(external) https://github.com/deodatus/ordinem.git":https://github.com/deodatus/ordinem.git
 
@@ -45,7 +54,7 @@ ABOUT_UK
 
     Page.create!(:name => 'terms', :title => 'Terms of use', :locale => 'en', :published => true,
     :content => <<TERMS_EN)   
-# d
+# This a test version, not stable. Use it "as is"
 
 TERMS_EN
 
@@ -58,7 +67,7 @@ TERMS_EN
 
 TERMS_UK
 
-  #end
+  end
 
 end
 

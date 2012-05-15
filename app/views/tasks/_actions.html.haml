@@ -1,0 +1,26 @@
+%a.btn.dropdown-toggle{"data-toggle" => "dropdown"}
+  %i.icon-cog
+  %span.caret
+
+%ul.dropdown-menu
+  /
+    %li
+      = link_to "#" do
+        %i.icon-eye-open
+        = t('action.show')
+  - unless task.complete?  
+    %li
+      = link_to new_task_path({:task => {:tasktable_id => task.id, :tasktable_type => "Task"}, :project_id => current_project.id})  do
+        %i.icon-plus
+        = t('task.create-subtask')
+    %li.divider
+      
+  - if task.user == current_user
+    %li
+      = link_to edit_task_path(task, { :project_id => current_project.id }) do 
+        %i.icon-pencil
+        = t('action.edit')
+    %li 
+      = link_to task_path(task, { :project_id => current_project.id }), :method => :delete, confirm: t('action.confirm-delete', :name => task.name), :remote => true, :class=>'delete_task'  do 
+        %i.icon-trash
+        = t('action.delete')

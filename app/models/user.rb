@@ -7,15 +7,20 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
-  attr_accessible :first_name, :last_name, :home_address, 
+  attr_accessible :first_name, :last_name, :home_address, :id,
                   :home_number, :mobile_number, :fax_number, :office_number,
                   :locale, :is_admin
                   
   has_many :projects, :dependent => :destroy
-  # has_many :collaborations
+  has_many :collaborations, :dependent => :destroy
+  has_many :tasks
+  
+  # has_many :shared_projects, :source => "project", :through => :collaborations, :conditions => Proc.new { "member_id = #{self.id}"}
+  
   
   def all_projects
-    collaborations.map(&:project) | Project.where(:user_id => id)
+   # collaborations.map(&:project) 
+   #collaborations.map{|c| c.project_id, c.member_id == self.id }
   end
   
 

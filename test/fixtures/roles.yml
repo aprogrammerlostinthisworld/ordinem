@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  can_view_tasks: false
+  can_add_tasks: false
+
+two:
+  name: MyString
+  can_view_tasks: false
+  can_add_tasks: false

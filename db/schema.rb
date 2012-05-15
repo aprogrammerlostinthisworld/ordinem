@@ -11,14 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120510121133) do
+ActiveRecord::Schema.define(:version => 20120514184518) do
 
   create_table "collaborations", :force => true do |t|
     t.integer  "project_id"
     t.integer  "member_id"
-    t.boolean  "can_manage_tasks", :default => false
-    t.datetime "created_at",                          :null => false
-    t.datetime "updated_at",                          :null => false
+    t.integer  "role_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "pages", :force => true do |t|
@@ -57,14 +57,20 @@ ActiveRecord::Schema.define(:version => 20120510121133) do
 
   add_index "rails_admin_histories", ["item", "table", "month", "year"], :name => "index_rails_admin_histories"
 
+  create_table "roles", :force => true do |t|
+    t.string  "name"
+    t.boolean "can_view_tasks",         :default => false, :null => false
+    t.boolean "can_manage_tasks",       :default => false, :null => false
+    t.boolean "can_view_collaborators", :default => false, :null => false
+  end
+
   create_table "tasks", :force => true do |t|
     t.integer  "user_id"
     t.string   "name"
     t.text     "description"
     t.integer  "priority"
     t.integer  "status",          :default => 0
-    t.datetime "date_start"
-    t.datetime "date_due"
+    t.integer  "duration"
     t.integer  "updated_by_id"
     t.datetime "completed_at"
     t.integer  "completed_by_id"

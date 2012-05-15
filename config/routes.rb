@@ -21,12 +21,12 @@ Ordinem::Application.routes.draw do
   resources :pages, :only => [:show, :home]
   resources :users, :only => [:show, :edit]
   resources :tasks do
-    member do
-      put 'set_complete', :as => 'set_complete'
+    collection do
+      put :set_complete
     end
   end
   resources :projects 
-  resources :collaborations, :only => [:index, :create, :destroy]
+  resources :collaborations, :only => [:index, :create, :destroy, :update]
   
   
 

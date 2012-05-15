@@ -6,9 +6,7 @@ class CreateTasks < ActiveRecord::Migration
       t.text       :description
       t.integer    :priority
       t.integer    :status,    :default => 0 # [0-active, -1-hold, 1-complete]
-      t.datetime   :date_start
-      t.datetime   :date_due
-
+      t.integer    :duration
       
       t.integer    :updated_by_id
       t.datetime   :completed_at

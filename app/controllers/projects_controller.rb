@@ -7,6 +7,14 @@ class ProjectsController < ApplicationController
   def index
     @projects = current_user.projects
     redirect_to :action => 'new' if @projects.empty?
+    # @invited_projects = Collaboration.where(:member_id, current_user.id)
+  @invited_projects = Project.find(:all,
+  :joins => "INNER JOIN 'collaborations' ON 'projects'.'id' = 'collaborations'.'project_id'",
+  :conditions => " 'collaborations'.'member_id' = #{current_user.id} ")
+  
+   #:joins => "LEFT JOIN `collaborations` ON collaborations.project_id = projects.id",
+   # @invited_projects = Project.joins(:collaborations).where('collaborations.member_id' => current_user.id)
+  
   end
 
   def new
@@ -24,6 +32,7 @@ class ProjectsController < ApplicationController
   
   def show
     user_session[:current_project_id] = params[:id]
+    @collaborations = @project.collaborations
   end
 
   def edit

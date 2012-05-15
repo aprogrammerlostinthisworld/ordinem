@@ -8,6 +8,7 @@
       %ul
         - @taskerrors.full_messages.each do |msg|
           %li= msg
+          
   .control-group
     = f.label :name, t('task.name'), :class => 'control-label'
     .controls
@@ -21,7 +22,6 @@
   .control-group
     = f.label t('task.priority'), :class => 'control-label'
     .controls
-      
       = f.label :priority, :value => 0, :class => 'radio'  do
         = f.radio_button :priority, 0, :checked => true
         = t('task.low')    
@@ -33,10 +33,9 @@
         = t('task.hight')
         
   .control-group
-    = f.label t('dates'), :class => 'control-label'
+    = f.label :duration, t('duration'), :class => 'control-label'
     .controls
-      = f.text_field :date_start, :class => 'span2', :id => "from", :class=> "datepicker" 
-      = f.text_field :date_due, :class => 'span2', :id => "to", :class=> "datepicker"   
+      = f.text_field :duration, :class => 'span2' 
       
   - unless @task.new_record?  
     .control-group

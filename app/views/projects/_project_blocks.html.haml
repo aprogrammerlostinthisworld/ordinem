@@ -1,5 +1,5 @@
 .project
-  - @projects.each_slice(3) do |project|
+  - projects.each_slice(3) do |project|
     .row-fluid
       - project.each do |project|
         .span4
@@ -8,11 +8,14 @@
           %p
             = project.description
           .row-fluid
-          
             .span2
               = "#{project.tasks_complete_counter} / #{project.tasks_counter}" 
-            .span8
-              = render :partial => 'projects/progress_bar', :locals => { :project => project }  
+            .span6
+              = render :partial => 'projects/progress_bar', :locals => { :project => project }
+            .span2
+              .pull-right
+                %i.icon-user
+                = "#{project.collaborations.count} "
             .span2
               .btn-group.pull-right
                 /
@@ -21,7 +24,12 @@
                 %a.btn.btn-mini.btn-header.dropdown-toggle{"data-toggle" => "dropdown"}
                   %i.icon-cog
                   %span.caret
-                = render :partial => 'projects/actions', :locals => { :project => project }  
-
+                = render :partial => 'projects/actions', :locals => { :project => project } 
+            - unless project.date_to.blank?
+              .row-fluid
+                .span12
+                  = l(project.date_to, :format => :long) unless project.date_to.blank?
+                  \-
+                  = l(project.date_to, :format => :long)
    
   

@@ -1,5 +1,4 @@
 uk:
-
   dashboard: Огляд
   
   update: Оновити
@@ -13,16 +12,28 @@ uk:
   account: Аккаунт
 
   progress: Прогрес
+  duration: Тривалість
+  begin_date: Початок
   expiration_date: Дата завершення
+  created: Створено
+  completed: Завершено
+  at: в
 
-  collaborator:
+  # Collaboration 
+  collaboration:
     collaborators: Співробітники
     add: Додати нового
     name: Ім’я
     invite: Запросити
-    has_tasks: Має завдання
+    role: Роль
+    unshare: Заборонити доступ...
+    empty: Немає співробітників
     list: Всі співробітники
-
+    invited: Користувач %{email} запрошений до проекту
+    user_removed: Користувач видалений з цього проекту
+    already_invited: Користувач %{email} вже є в проекті
+    invited_at: Запрошений
+    
   # Actions
   action:
     edit: Правити
@@ -46,9 +57,7 @@ uk:
     all: Всі
     completed: Завершені
     incompleted: Незавершені
-    get_to_perform: Взяти на виконання
-    set_as_comleted: Встановити як завершений
-    set_as_hold: Встановити як заморожений
+    set_as_comleted: Завершити
     status: Статус
     hold: Заморожено
     complete: Виконано
@@ -58,7 +67,6 @@ uk:
     medium: Середній
     hight: Високий
     
-  
   # Project
   project:
     name: Назва проекту
@@ -80,7 +88,7 @@ uk:
     about:  Про
     terms: Умови використання
     help:  Допомога
-  
+
   # User
   user:
     first_name: Ім’я

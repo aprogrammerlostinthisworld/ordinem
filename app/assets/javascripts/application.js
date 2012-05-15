@@ -36,6 +36,19 @@ $(document).ready(function(){
     $(this).closest('.task').fadeOut().remove();  
   }); 
   
+  $('.delete_member').bind('ajax:success', function() {  
+    $(this).closest('.member').slideUp().remove();  
+    var rowCount = $('#members tr').length;
+    //alert(rowCount);
+    if (rowCount == 1) {
+      $("#members").fadeOut().remove(); 
+      $("#no_data").show();
+    }
+  }); 
+  
+  
+  
+ 
   $("#btn-all").click(function(){
     $("#tasks").children().slideDown();  
   });

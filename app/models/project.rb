@@ -19,11 +19,11 @@ class Project < ActiveRecord::Base
     members.all #<< user
   end
   
-  def permissions_for(user)
-		# false if self.collaborations.where(:can_manage_task => true, :user_id => user.id)
-    # return Collaboration.select(:can_manage_tasks).where("project_id = #{self.id} AND member_id = #{user.id}")
-    (Collaboration.first(:conditions => ['member_id = ? AND project_id = ?', user.id, self.id]) || false)
-	end
+# def permissions_for(user)
+#		# false if self.collaborations.where(:can_manage_task => true, :user_id => user.id)
+#    # return Collaboration.select(:can_manage_tasks).where("project_id = #{self.id} AND member_id = #{user.id}")
+#    (Collaboration.first(:conditions => ['member_id = ? AND project_id = ?', user.id, self.id]) || false)
+#	end
  
   
   def active?

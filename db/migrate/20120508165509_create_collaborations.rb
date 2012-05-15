@@ -4,8 +4,9 @@ class CreateCollaborations < ActiveRecord::Migration
       t.references  :project
       t.references  :member             
   
-      t.boolean     :can_manage_tasks,      :default => false
-    
+      #t.boolean     :can_manage_tasks,      :default => false
+      t.references  :role
+      
       t.timestamps
     end
   end

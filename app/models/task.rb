@@ -1,6 +1,6 @@
 class Task < ActiveRecord::Base
-  attr_accessible :name, :priority, :description, :status,
-                  :date_start, :date_due,
+  attr_accessible :name, :priority, :description, :status, :duration,
+                  :completed_at, :completed_by_id, :updated_at,
                   :tasktable_id, :tasktable_type, :user_id
   after_create  :increment_tasks
   after_destroy :decrement_tasks

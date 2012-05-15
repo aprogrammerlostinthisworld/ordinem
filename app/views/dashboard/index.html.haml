@@ -21,14 +21,15 @@
     .span2
       .sidebar-nav
         %ul.nav.nav-list
-          %li.nav-header 
-            = t('task.task')
-          %li
-            = link_to new_task_path({:task => {:tasktable_id => current_project.id, :tasktable_type => "Project"}, :project_id => current_project.id}) do
-              %i.icon-plus
-              = t('task.create')    
-          %li
-            %hr
+          - if current_project.active?
+            %li.nav-header 
+              = t('task.task')
+            %li
+              = link_to new_task_path({:task => {:tasktable_id => current_project.id, :tasktable_type => "Project"}, :project_id => current_project.id}) do
+                %i.icon-plus
+                = t('task.create')    
+            %li
+              %hr
           %li.dropdown.nav-header 
             %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
               %i.icon-book

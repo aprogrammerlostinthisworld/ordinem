@@ -16,12 +16,14 @@ class TasksController < ApplicationController
   
   
   def set_complete
-    @task = Task.find_by_id(params[:id])
-    if @task.update_attributes(:status => 1)
-      redirect_to root_path
-    else
-      redirect_to root_path
-    end
+    @task = Task.find_by_id(params[:task_id])
+    # @task.update_attributes(:status => 1, :)
+    @task.update_attributes(:status => 1,
+                            :completed_at => Time.now,
+                            :completed_by_id => current_user.id
+                           )
+    
+    redirect_to root_path
   end
   
   def create

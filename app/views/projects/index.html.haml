@@ -1,11 +1,15 @@
 %section#projects_list
   .page-header
-  /
     %h1
       You projects
-      %small Select and manage
-  = render :partial => 'projects/project_blocks', :object => @project
+  = render :partial => 'projects/project_blocks', :locals => { :projects => @projects }
   
+  - unless @invited_projects.blank?
+    .page-header
+      %h1
+        Invited projects
+    = render :partial => 'projects/project_blocks', :locals => { :projects => @invited_projects }
+      
   .form-actions
     = link_to new_project_path, :class => 'btn btn-success btn-large' do
       %i.icon-add
