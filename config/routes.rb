@@ -12,7 +12,7 @@ Ordinem::Application.routes.draw do
   
 
   
-  match '/profile',       :to => 'devise/registrations#edit'
+  #match '/profile',       :to => 'devise/registrations#edit'
  
   match '/errors(/:id)',  :to => 'pages#errors'
   
