@@ -9,8 +9,8 @@ class ProjectsController < ApplicationController
     redirect_to :action => 'new' if @projects.empty?
     # @invited_projects = Collaboration.where(:member_id, current_user.id)
     @invited_projects = Project.find(:all,
-      :joins => "INNER JOIN 'collaborations' ON 'projects'.'id' = 'collaborations'.'project_id'",
-      :conditions => " 'collaborations'.'member_id' = #{current_user.id} ")
+      :joins => "INNER JOIN \"collaborations\" ON \"projects\".\"id\" = \"collaborations\".\"project_id\"",
+      :conditions => "\"collaborations\".\"member_id\" = #{current_user.id} ")
   
   end
 

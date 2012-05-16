@@ -16,7 +16,7 @@ Ordinem::Application.routes.draw do
  
   match '/errors(/:id)',  :to => 'pages#errors'
   
-  #match '/page/:id',      :to => 'pages#index' 
+  match '/page/:id',      :to => 'pages#index' 
   
   resources :pages, :only => [:show, :home]
   resources :users, :only => [:show, :edit]

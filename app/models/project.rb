@@ -33,8 +33,8 @@ class Project < ActiveRecord::Base
  #     :conditions => " 'collaborations'.'member_id' = #{current_user.id} ") 
     return Role.find_by_name('Manager') if self.user_id == user.id 
     (Role.find(:first,
-      :joins => "INNER JOIN 'collaborations' ON 'roles'.'id' = 'collaborations'.'role_id'",
-      :conditions => " 'collaborations'.'member_id' = #{user.id} AND 'collaborations'.'project_id' = #{self.id}") || false)
+      :joins => "INNER JOIN `collaborations` ON `roles`.`id` = `collaborations`.`role_id`",
+      :conditions => "`collaborations`.`member_id` = #{user.id} AND `collaborations`.`project_id` = #{self.id}") || false)
     
   end
   
