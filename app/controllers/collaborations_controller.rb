@@ -35,6 +35,9 @@ class CollaborationsController < ApplicationController
   end
 
   def index
+    if view_context.current_project.blank?
+      redirect_to :controller => 'projects', :action => 'index'
+    end
     @collaboration = @project.collaborations.build
     @collaborations = @project.collaborations
     #@members = @project.members
