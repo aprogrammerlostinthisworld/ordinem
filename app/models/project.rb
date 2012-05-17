@@ -15,9 +15,9 @@ class Project < ActiveRecord::Base
   
   default_scope :order => 'projects.created_at DESC'
 
-#  def collaborators
-#    members.all #<< user
-#  end
+  def collaborators
+    members.all << user
+  end
   
 # def permissions_for(user)
 #		# false if self.collaborations.where(:can_manage_task => true, :user_id => user.id)
