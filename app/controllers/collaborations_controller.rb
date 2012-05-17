@@ -10,7 +10,7 @@ class CollaborationsController < ApplicationController
     
     user = User.find_or_initialize_by_email(params[:collaboration][:email])
 
-    redirect_to collaborations_path(@project),
+    redirect_to collaborations_path,
        :notice => t('collaboration.already_invited', :email => user.email) and return if @project.collaborators.include?( user )
 
     # if user not registered in system then send invite him
@@ -31,7 +31,7 @@ class CollaborationsController < ApplicationController
    # @project.members << user #original
   #  Mailer.delay.invite(user, @project.name, user.password)
 
-    redirect_to collaborations_path(@project), :notice => t('collaboration.invited', :email => user.email)
+    redirect_to collaborations_path, :notice => t('collaboration.invited', :email => user.email)
   end
 
   def index
@@ -54,6 +54,8 @@ class CollaborationsController < ApplicationController
     
   end
 
+  def show
+  end
 
   protected
   

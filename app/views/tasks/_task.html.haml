@@ -26,15 +26,17 @@
         .span6
           = t('created')
           = link_to task.user.display_name, task.user
-          = t('at') 
-          = l(task.created_at, :format => :short)
+          /
+            = t('at') 
+            = l(task.created_at, :format => :short)
 
         .span6
           - unless task.completed_by_id.nil?
             = t('completed')
             = link_to User.find_by_id(task.completed_by_id).display_name, User.find_by_id(task.completed_by_id) 
-            = t('at')
-            = l(task.completed_at, :format => :short)
+            /
+              = t('at')
+              = l(task.completed_at, :format => :short)
           - unless task.duration.nil? || task.complete?
             = t('duration')
             = task.duration

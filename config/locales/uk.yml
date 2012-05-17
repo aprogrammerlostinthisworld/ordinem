@@ -12,7 +12,7 @@ uk:
   account: Аккаунт
 
   progress: Прогрес
-  duration: Тривалість
+  duration: Тривалість, д.
   begin_date: Початок
   expiration_date: Дата завершення
   created: Створено
@@ -48,7 +48,7 @@ uk:
     task: Завдання
     tasks: Завдання
     name: Назва
-    description: Опис проекту
+    description: Опис завдання
     new_task: Нове завдання
     edit_task: Редагувати завдання
     create: Створити завдання
@@ -76,6 +76,8 @@ uk:
     goal: Ціль проекту
     description: Опис
     list: Список проектів
+    your_projects: Ваші проекти
+    invited_projects: Ви запрошені проекти
     create: Створити проект
     new_project: Новий проект
     edit_project: Редавування проекту

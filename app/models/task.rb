@@ -10,7 +10,7 @@ class Task < ActiveRecord::Base
   validates :name, :presence => true
   validates :tasktable_id, :presence => true
   
-  default_scope :order => 'tasks.priority DESC'
+ # default_scope :order => 'tasks.priority DESC'
 
   #belongs_to :project
   belongs_to :user

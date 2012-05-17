@@ -13,7 +13,7 @@
     - unless current_project.blank?
       %li{:class => (controller.controller_name == "collaborations" ? 'active' : nil) }
         = link_to collaborations_path do
-          = t('collaborator.collaborators')
+          = t('collaboration.collaborators')
     %li.divider-vertical
     %li.dropdown
       %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
