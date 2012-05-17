@@ -35,9 +35,9 @@ class CollaborationsController < ApplicationController
   end
 
   def index
-    if @project.nil?
-      redirect_to :controller => 'projects', :action => 'index'
-    end
+   # if @project.nil?
+   #   redirect_to :controller => 'projects', :action => 'index'
+   # end
     @collaboration = @project.collaborations.build
     @collaborations = @project.collaborations
     #@members = @project.members
